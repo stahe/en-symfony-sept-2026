@@ -395,6 +395,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="1.3. Run the case study">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-installing-laragon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.1. Installing Laragon
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-running-the-case-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.2. Running the Case Study
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -824,7 +852,7 @@
 </code></pre></div></td></tr></table></div>
 <p>or using the <em>[Symfony]</em> command-line tool (the <strong><em>[symfony]</em></strong> program; see appendices): <strong><em>[symfony new mon-projet --webapp]</em></strong>. <em>[Composer]</em> then downloads the <strong>skeleton</strong> of a <em>[Symfony]</em> application, followed by its libraries. The skeleton also contains <em>[Symfony Flex]</em>, a plugin for <em>[Composer]</em> that, each time a library (<strong><em>[composer require twig]</em></strong>) is installed, writes its own configuration files based on <strong>templates</strong> published online. This is how you start a real project. For learning purposes, this method has a drawback: the files appear on their own, without you knowing what they’re for. The examples in this document therefore start from the other end: Example 01 is the smallest possible <em>[Symfony]</em> application, and each example adds only the files it needs, written and commented on by hand. The case study at the end follows the structure of a standard <em>[Symfony]</em> application.</p>
 <h2 id="13-run-the-case-study">1.3. <span style="color: #2e74b5">Run the case study</span></h2>
-<p><span style="color: #1f4d78">Installing Laragon</span></p>
+<h3 id="131-installing-laragon">1.3.1. <span style="color: #4f81bd">Installing Laragon</span></h3>
 <p>The case study requires SGBD, MySQL, a PHP interpreter, and the PHP and [composer] package installer. Laragon can provide all of this and more. As of September 2026, Laragon is available at URL and <em><mark style="background-color: #fff5ce">[Download Laragon – Fast &amp; Modern Dev Environment ]</mark></em>. Laragon comes with tools that allow you to install a PHP server and the SGBD and <em><mark style="background-color: #fff5ce">[MySQL]</mark></em>:</p>
 <p><img src="images/10000000000006440000030C86481A8B.png" width="643" height="312" style="width:17cm;height:8.266cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000006440000030C86481A8B.png" /></p>
 <ul>
@@ -958,7 +986,15 @@
 </ul>
 </li>
 </ul>
-<p><span style="color: #1f4d78">Running the Case Study</span></p>
+<h3 id="132-running-the-case-study">1.3.2. <span style="color: #4f81bd">Running the Case Study</span></h3>
+<p><strong>Reviewer’s note</strong>: I advise the reader to run the case study immediately as described below. Once you fully understand the purpose of this appointment scheduling application, ask your favorite IA to modify the application as follows: from now on, each doctor will be able to:</p>
+<ul>
+<li>set their own appointment slots between two dates. This will allow them to adjust their schedule as needed;</li>
+<li>remove certain time slots from the calendar for a given day—for example, if they are unavailable for personal reasons;</li>
+</ul>
+<p>The modification is not straightforward because it involves a change to the database structure. Ask IA to provide you with the new application code and the SQL script to create the new database. To do this, you’ll need to provide them with the ZIP file containing the complete project as well as the SQL script for the old database.</p>
+<p>Also, I haven’t reviewed the course created by <strong>Claude</strong>. He had already produced the courses [NestJS], [ASP.NET Core MVC], [Spring MVC], and [Flask], all of which were perfect. I assumed the same was true for this one. If you run into a problem understanding something, the solution is always the same: ask your favorite IA to explain what you don’t understand. <strong>Claude</strong>, for example, is very good at this. You may need to “upload” the example you don’t understand to him.</p>
+<p><strong>End of note</strong>.</p>
 <p>The case study at the end of this document is a complete application. Readers will likely want to see it in action before delving into the details of the framework: here’s how to run it. It is located in the <strong><em>[rdvmedecins2-symfony]</em></strong> folder, next to the <strong><em>[exemples]</em></strong> folder:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
