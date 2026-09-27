@@ -1,0 +1,1383 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Step-by-Step Introduction to the [Symfony] Web Framework">
+      
+      
+        <meta name="author" content="Serge Tahé">
+      
+      
+        <link rel="canonical" href="https://stahe.github.io/en-symfony-sept-2026/data-scopes.html">
+      
+      
+        <link rel="prev" href="internationalization.html">
+      
+      
+        <link rel="next" href="the-lifecycle-of-a-request.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>6. Data Scopes - Step-by-Step Introduction to the [Symfony] Web Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/focus.css">
+    
+      <link rel="stylesheet" href="stylesheets/bidi.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBZC3JVJNR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var siteName = "Step-by-Step Introduction to the [Symfony] Web Framework";
+    gtag('config', 'G-EBZC3JVJNR', {
+        'page_title': siteName
+    });
+  </script>
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-data-scopes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Step-by-Step Introduction to the [Symfony] Web Framework" class="md-header__button md-logo" aria-label="Step-by-Step Introduction to the [Symfony] Web Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Step-by-Step Introduction to the [Symfony] Web Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6. Data Scopes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://stahe.github.io/en-symfony-sept-2026" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Step-by-Step Introduction to the [Symfony] Web Framework" class="md-nav__button md-logo" aria-label="Step-by-Step Introduction to the [Symfony] Web Framework" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Step-by-Step Introduction to the [Symfony] Web Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://stahe.github.io/en-symfony-sept-2026" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="introduction.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="actions-routing-responses.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Actions, Routing, Responses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="the-action-template.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. The Action Template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="the-view-and-its-model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. The View and Its Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="internationalization.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Internationalization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Data Scopes
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="data-scopes.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Data Scopes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61-example-23-scopes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. Example 23: Scopes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1. Example 23: Scopes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#611-the-objects-srcservicecompteurservicephp-and-requeteinfosphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1. The objects: src/Service/CompteurService.php and RequeteInfos.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612-a-global-variable-for-the-views-configpackagestwigyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2. A global variable for the views: config/packages/twig.yaml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#613-signed-cookies-srcservicecookiessignesphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.3. Signed cookies: src/Service/CookiesSignes.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#614-the-controller-srccontrollerporteescontrollerphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.4. The controller: src/Controller/PorteesController.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#615-the-view-templatesporteesporteeshtmltwig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.5. The view: templates/portees/portees.html.twig
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#616-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.6. Execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="the-lifecycle-of-a-request.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. The Lifecycle of a Request
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="authentication-and-authorization.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Authentication and Authorization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="layered-architecture-and-data-access.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Layered Architecture and Data Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interim-conclusion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Interim Conclusion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="case-study-the-rdvmedecins-application.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Case Study: The RdvMedecins Application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="conclusion.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Conclusion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="appendices.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Appendices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6-data-scopes">6. <span style="color: #2e74b5">Data Scopes</span></h1>
+<p>A web application serves many users at once, and each user makes numerous requests. Data can therefore be shared at several levels, known as its <strong>scope</strong>:</p>
+<ul>
+<li><strong>application</strong> scope: the data is shared by all users throughout the application’s lifetime (the list of doctors, for example);</li>
+<li><strong>request</strong> scope: the data exists only for the duration of processing a request (a view’s model, the logged-in user as identified for that request);</li>
+<li><strong>session</strong> scope: the data is specific to a user and must persist from one request to the next (the selected language, a shopping cart);</li>
+<li><strong>client</strong> scope: data stored in the browser itself, in a cookie.</li>
+</ul>
+<p>In <em>[PHP]</em>, these scopes behave in a particular way because the application is rebuilt with every request (Example 01): <strong>nothing survives in memory from one request to the next</strong>. Any data that needs to last longer than a single request is therefore stored outside of <em>[PHP]</em>: in the cache, a database, files, or on the client’s side. This is the so-called “<em>shared-nothing</em>” architecture: each request is processed in isolation by a process that shares nothing with those processing other requests. This approach has significant advantages: an error affects only a single request, no data leaks from one user to another, and multiple identical servers can be run behind a load balancer, provided they share the same cache and database.</p>
+<p>In <em>[Symfony]</em>, each scope has its own container:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><b>Scope</b></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><b>Container</b></div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0"><b>Lifetime</b></div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">application</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">the <b>cache </b>(service <i><b>[cache.app]</b></i>, example 20), or the database</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">the selected duration, or unlimited</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">Query</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">the container’s services (one object per class, during the request), the request attributes (example 12)</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">processing a request</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">session</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">the <b>session </b>(<i><b>[$request-&gt;getSession()]</b></i>, Example 20), maintained by the server and retrieved via a cookie</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">until the browser is closed by default, and at most for the duration of the <i>[PHP]</i> session (24 minutes of inactivity by default)</div></td></tr><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">client</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">a <b>cookie </b>(<i><b>[Cookie::create]</b></i>, example 22), in plain text</div></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><div style="margin:0 0 0.5em 0">The cookie&#x27;s expiration time</div></td></tr></table>
+
+<p>The <em>[Symfony]</em> session is a <strong>server-side</strong> session, like those for <em>[Java]</em> (<strong><em>[JSESSIONID]</em></strong>) or the standard <em>[PHP]</em>, from which it actually borrows the mechanism and the cookie (<strong><em>[PHPSESSID]</em></strong>): its data is stored on the server (one file per session, with the configuration used in our examples), and the browser holds only the identifier—a random number that is impossible to guess. This differs from <em>[Flask]</em>, whose entire session is stored in a signed cookie on the client’s side.</p>
+<h2 id="61-example-23-scopes">6.1. <span style="color: #2e74b5">Example 23: Scopes</span></h2>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="mi">23</span><span class="o">-</span><span class="n">portees</span><span class="o">/</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="err">├──</span><span class="w"> </span><span class="n">config</span><span class="o">/</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">packages</span><span class="o">/</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="err">│</span><span class="w">       </span><span class="err">├──</span><span class="w"> </span><span class="n">framework</span><span class="p">.</span><span class="na">yaml</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="err">│</span><span class="w">       </span><span class="err">└──</span><span class="w"> </span><span class="n">twig</span><span class="p">.</span><span class="na">yaml</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="err">├──</span><span class="w"> </span><span class="n">src</span><span class="o">/</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">Controller</span><span class="o">/</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="err">│</span><span class="w">   </span><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">PorteesController</span><span class="p">.</span><span class="na">php</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">Service</span><span class="o">/</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="err">│</span><span class="w">       </span><span class="err">├──</span><span class="w"> </span><span class="n">CompteurService</span><span class="p">.</span><span class="na">php</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="err">│</span><span class="w">       </span><span class="err">├──</span><span class="w"> </span><span class="n">CookiesSignes</span><span class="p">.</span><span class="na">php</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="err">│</span><span class="w">       </span><span class="err">└──</span><span class="w"> </span><span class="n">RequeteInfos</span><span class="p">.</span><span class="na">php</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="err">├──</span><span class="w"> </span><span class="n">templates</span><span class="o">/</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">portees</span><span class="o">/</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="err">│</span><span class="w">       </span><span class="err">└──</span><span class="w"> </span><span class="n">portees</span><span class="p">.</span><span class="na">html</span><span class="p">.</span><span class="na">twig</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="err">└──</span><span class="w"> </span><span class="p">...</span>
+</code></pre></div></td></tr></table></div>
+<p>The file <strong><em>[config/packages/framework.yaml]</em></strong> configures the session and locks, as in Example 20.</p>
+<h3 id="611-the-objects-srcservicecompteurservicephp-and-requeteinfosphp">6.1.1. <span style="color: #1f4d78">The objects: src/Service/CompteurService.php and RequeteInfos.php</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span>
+<span class="normal"><a href="#__codelineno-1-24">24</a></span>
+<span class="normal"><a href="#__codelineno-1-25">25</a></span>
+<span class="normal"><a href="#__codelineno-1-26">26</a></span>
+<span class="normal"><a href="#__codelineno-1-27">27</a></span>
+<span class="normal"><a href="#__codelineno-1-28">28</a></span>
+<span class="normal"><a href="#__codelineno-1-29">29</a></span>
+<span class="normal"><a href="#__codelineno-1-30">30</a></span>
+<span class="normal"><a href="#__codelineno-1-31">31</a></span>
+<span class="normal"><a href="#__codelineno-1-32">32</a></span>
+<span class="normal"><a href="#__codelineno-1-33">33</a></span>
+<span class="normal"><a href="#__codelineno-1-34">34</a></span>
+<span class="normal"><a href="#__codelineno-1-35">35</a></span>
+<span class="normal"><a href="#__codelineno-1-36">36</a></span>
+<span class="normal"><a href="#__codelineno-1-37">37</a></span>
+<span class="normal"><a href="#__codelineno-1-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="c1">// src/Service/CompteurService.php: scope APPLICATION, counters shared by</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="c1">// all requests from all users, stored in the cache (see Example 20)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="k">namespace</span> <span class="nx">App\Service</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="k">use</span> <span class="nx">Psr\Cache\CacheItemPoolInterface</span><span class="p">;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="k">use</span> <span class="nx">Symfony\Component\Lock\LockFactory</span><span class="p">;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="k">class</span> <span class="nc">CompteurService</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="p">{</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a>    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a>        <span class="k">private</span> <span class="nx">CacheItemPoolInterface</span> <span class="nv">$cache</span><span class="p">,</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a>        <span class="k">private</span> <span class="nx">LockFactory</span> <span class="nv">$verrous</span><span class="p">,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a>    <span class="p">)</span> <span class="p">{</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a>    <span class="p">}</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a>     <span class="c1">// one more number under the key [$cle]; the "file" cache does not increment a</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a>     <span class="c1">// number atomically: a lock protects read and write operations</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">suivant</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$cle</span><span class="p">)</span><span class="o">:</span> <span class="nx">int</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21"></a>    <span class="p">{</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22"></a>        <span class="nv">$verrou</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">verrous</span><span class="o">-&gt;</span><span class="na">createLock</span><span class="p">(</span><span class="s2">"</span><span class="si">$cle</span><span class="s2">-verrou"</span><span class="p">);</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23"></a>        <span class="nv">$verrou</span><span class="o">-&gt;</span><span class="na">acquire</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24"></a>        <span class="k">try</span> <span class="p">{</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25"></a>            <span class="nv">$element</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">getItem</span><span class="p">(</span><span class="nv">$cle</span><span class="p">);</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26"></a>            <span class="nv">$valeur</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$element</span><span class="o">-&gt;</span><span class="na">isHit</span><span class="p">()</span> <span class="o">?</span> <span class="nv">$element</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span> <span class="o">:</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27"></a>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$element</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$valeur</span><span class="p">));</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28"></a>            <span class="k">return</span> <span class="nv">$valeur</span><span class="p">;</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29"></a>        <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30"></a>            <span class="nv">$verrou</span><span class="o">-&gt;</span><span class="na">release</span><span class="p">();</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31"></a>        <span class="p">}</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32"></a>    <span class="p">}</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33"></a>
+<a id="__codelineno-1-34" name="__codelineno-1-34"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">incrementer</span><span class="p">()</span><span class="o">:</span> <span class="nx">int</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35"></a>    <span class="p">{</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36"></a>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">suivant</span><span class="p">(</span><span class="s1">'visites'</span><span class="p">);</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37"></a>    <span class="p">}</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>lines 12–16: the service receives the application cache and the lock factory (Example 20);</li>
+<li>lines 20–32: an application-scope counter: a number stored in the cache under a key and incremented by 1 on each call. The “file” cache in our examples does not support <strong>atomic</strong> increment operations: the value must be read, incremented, and then written, and two concurrent requests could read the same value—resulting in a missed hit. A lock—one per key—therefore protects both read and write operations; the block <strong><em>[finally]</em></strong> releases it in all cases, even after the <strong><em>[return]</em></strong> in line 28;</li>
+<li>lines 34–37: the visit counter.</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="c1">// src/Service/RequeteInfos.php: scope REQUÊTE, the information from a request</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="k">namespace</span> <span class="nx">App\Service</span><span class="p">;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="k">use</span> <span class="nx">DateTimeImmutable</span><span class="p">;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="k">class</span> <span class="nc">RequeteInfos</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="p">{</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a>    <span class="k">public</span> <span class="k">readonly</span> <span class="nx">int</span> <span class="nv">$numero</span><span class="p">;</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a>    <span class="k">public</span> <span class="k">readonly</span> <span class="nx">string</span> <span class="nv">$debut</span><span class="p">;</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a>     <span class="c1">// the container creates a UN object of this class upon the first request, and the</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a>     <span class="c1">// then returns it to anyone who requests it during the request</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a>    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">CompteurService</span> <span class="nv">$compteur</span><span class="p">)</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a>    <span class="p">{</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a>         <span class="c1">// a number generated by OBJET, drawn from a counter shared by all requests</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">numero</span> <span class="o">=</span> <span class="nv">$compteur</span><span class="o">-&gt;</span><span class="na">suivant</span><span class="p">(</span><span class="s1">'instances'</span><span class="p">);</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a>         <span class="c1">// the time, including milliseconds (v)</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21"></a>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">debut</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">DateTimeImmutable</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">'H:i:s.v'</span><span class="p">);</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22"></a>    <span class="p">}</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>lines 10–12: properties declared as <strong><em>[readonly]</em></strong> one by one (rather than the entire class): they can only be assigned once, by the constructor;</li>
+<li>lines 16–22: request-scope information: a number, derived from a counter shared by all requests (the previous service, under a different key), and the request time, including milliseconds (<strong><em>[v]</em></strong> format). The constructor receives the <strong><em>[CompteurService]</em></strong> from the container: a service can request another service, just like an action.</li>
+</ul>
+<p>No configuration is required: by default, a service in the container is <strong>shared</strong> (<em>shared</em>). The container creates the object on the first request, then returns the same one to all subsequent requests. In standard <em>[PHP]</em> mode, the container is rebuilt with each request: a shared service is therefore a request-scoped object. (You can also request a new object with each injection using the <strong><em>[shared: false]</em></strong> option in the <strong><em>[services.yaml]</em></strong> file.) A nuance arises with application servers that keep the application in memory from one request to the next to improve performance, such as the <em>worker</em> mode of <em>[FrankenPHP]</em>: in this case, a service is shared by all requests handled by the process. <em>[Symfony]</em> then resets, between requests, the services that implement the <strong><em>[ResetInterface]</em></strong> interface; it is up to those services to ensure that nothing is retained from one request to the next.</p>
+<h3 id="612-a-global-variable-for-the-views-configpackagestwigyaml">6.1.2. <span style="color: #1f4d78">A global variable for the views: config/packages/twig.yaml</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span>
+<span class="normal"><a href="#__codelineno-3-6">6</a></span>
+<span class="normal"><a href="#__codelineno-3-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># config/packages/twig.yaml: the configuration of TwigBundle</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">twig</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>    <span class="n">default_path</span><span class="p">:</span> <span class="s1">'%kernel.project_dir%/templates'</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>     <span class="c1"># a GLOBALE variable from the views, which is a SERVICE (the @ denotes a service):</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>     <span class="c1"># the RequeteInfos object of the current request</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>    <span class="nb">globals</span><span class="p">:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>        <span class="n">infos</span><span class="p">:</span> <span class="s1">'@App\Service\RequeteInfos'</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Lines 6–7: A <strong>global</strong> variable in the views (Example 15) can be a service: the name of its class, preceded by <strong><em>[@]</em></strong>. All views thus have access to the variable <strong><em>[infos]</em></strong>, which is the <strong><em>[RequeteInfos]</em></strong> object of the current request. <em>[Twig]</em> has no equivalent to the <strong><em>[@inject]</em></strong> directive of <em>[Blade]</em>: a view does not request anything from the container; it receives what is given to it.</li>
+</ul>
+<h3 id="613-signed-cookies-srcservicecookiessignesphp">6.1.3. <span style="color: #1f4d78">Signed cookies: src/Service/CookiesSignes.php</span></h3>
+<p>A cookie is a piece of data entrusted to the client, which can read and modify it. <em>[Laravel]</em> encrypts its cookies; <em>[Symfony]</em> does not. For a cookie to be trustworthy, however, it simply needs to be <strong>signed</strong>: its value is transmitted in plaintext, but it is followed by a signature that only the server knows how to calculate, because it depends on a secret key. A value modified by the client no longer has the correct signature, and the server rejects it.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span>
+<span class="normal"><a href="#__codelineno-4-29">29</a></span>
+<span class="normal"><a href="#__codelineno-4-30">30</a></span>
+<span class="normal"><a href="#__codelineno-4-31">31</a></span>
+<span class="normal"><a href="#__codelineno-4-32">32</a></span>
+<span class="normal"><a href="#__codelineno-4-33">33</a></span>
+<span class="normal"><a href="#__codelineno-4-34">34</a></span>
+<span class="normal"><a href="#__codelineno-4-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="c1">// src/Service/CookiesSignes.php: SIGNÉS cookies. The value is transmitted in plain text,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="c1">// followed by a signature that only the server knows how to calculate: a modified value</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="c1">// modified by the client no longer has the correct signature and is rejected</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="k">namespace</span> <span class="nx">App\Service</span><span class="p">;</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="k">use</span> <span class="nx">Symfony\Component\DependencyInjection\Attribute\Autowire</span><span class="p">;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="k">class</span> <span class="nc">CookiesSignes</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="p">{</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a>     <span class="c1">// the signature key: the application’s secret (APP_SECRET, .env file)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(#[</span><span class="nd">Autowire</span><span class="p">(</span><span class="s1">'%kernel.secret%'</span><span class="p">)]</span> <span class="k">private</span> <span class="nx">string</span> <span class="nv">$secret</span><span class="p">)</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>    <span class="p">{</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>    <span class="p">}</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a>     <span class="c1">// "5" -&gt; "5.3f1c...": the value, a period, the signature (HMAC-SHA256 of the value)</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">signer</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$valeur</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a>    <span class="p">{</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>        <span class="k">return</span> <span class="nv">$valeur</span><span class="o">.</span><span class="s1">'.'</span><span class="o">.</span><span class="nb">hash_hmac</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">,</span> <span class="nv">$valeur</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">secret</span><span class="p">);</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a>    <span class="p">}</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a>     <span class="c1">// the value if the signature is valid, null otherwise</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">verifier</span><span class="p">(</span><span class="o">?</span><span class="nx">string</span> <span class="nv">$cookie</span><span class="p">)</span><span class="o">:</span> <span class="o">?</span><span class="nx">string</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a>    <span class="p">{</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a>        <span class="k">if</span> <span class="p">(</span><span class="nv">$cookie</span> <span class="o">===</span> <span class="k">null</span> <span class="o">||</span> <span class="o">!</span> <span class="nb">str_contains</span><span class="p">(</span><span class="nv">$cookie</span><span class="p">,</span> <span class="s1">'.'</span><span class="p">))</span> <span class="p">{</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a>            <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a>        <span class="p">}</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29"></a>         <span class="c1">// strrpos: the position of the DERNIER dot</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30"></a>        <span class="nv">$valeur</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span><span class="nv">$cookie</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">strrpos</span><span class="p">(</span><span class="nv">$cookie</span><span class="p">,</span> <span class="s1">'.'</span><span class="p">));</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31"></a>         <span class="c1">// hash_equals compares two strings in constant time, which does not reveal</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32"></a>         <span class="c1">// how many characters are correct</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33"></a>        <span class="k">return</span> <span class="nb">hash_equals</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">signer</span><span class="p">(</span><span class="nv">$valeur</span><span class="p">),</span> <span class="nv">$cookie</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$valeur</span> <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34"></a>    <span class="p">}</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>line 13: The signature key is the application’s secret—the variable <strong><em>[APP_SECRET]</em></strong> in the file <strong><em>[.env]</em></strong> (Example 01)—which the container recognizes as the <strong>parameter</strong> <strong><em>[kernel.secret]</em></strong>. A parameter is not an object: the attribute <strong><em>[#[Autowire]]</em></strong> tells the container the value to provide, where <strong><em>[%nom%]</em></strong> refers to a parameter;</li>
+<li>lines 18–21: The signature is <strong>HMAC</strong> (<em>Hash-based Message Authentication Code</em>): the SHA-256 hash of the value, calculated using the secret key, written in hexadecimal. The cookie contains the value, a period, and then the signature;</li>
+<li>Lines 24–34: The verification process recalculates the signature of the received value and compares it to the one in the cookie. <strong><em>[hash_equals]</em></strong> compares two strings in a time that does not depend on the number of identical characters: a standard comparison would stop at the first differing character, and an attacker could, by measuring the response time, guess the signature character by character.</li>
+</ul>
+<p>This is the principle behind the JWT token, which the next chapter will use for authentication.</p>
+<h3 id="614-the-controller-srccontrollerporteescontrollerphp">6.1.4. <span style="color: #1f4d78">The controller: src/Controller/PorteesController.php</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span>
+<span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span>
+<span class="normal"><a href="#__codelineno-5-25">25</a></span>
+<span class="normal"><a href="#__codelineno-5-26">26</a></span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span>
+<span class="normal"><a href="#__codelineno-5-30">30</a></span>
+<span class="normal"><a href="#__codelineno-5-31">31</a></span>
+<span class="normal"><a href="#__codelineno-5-32">32</a></span>
+<span class="normal"><a href="#__codelineno-5-33">33</a></span>
+<span class="normal"><a href="#__codelineno-5-34">34</a></span>
+<span class="normal"><a href="#__codelineno-5-35">35</a></span>
+<span class="normal"><a href="#__codelineno-5-36">36</a></span>
+<span class="normal"><a href="#__codelineno-5-37">37</a></span>
+<span class="normal"><a href="#__codelineno-5-38">38</a></span>
+<span class="normal"><a href="#__codelineno-5-39">39</a></span>
+<span class="normal"><a href="#__codelineno-5-40">40</a></span>
+<span class="normal"><a href="#__codelineno-5-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">&lt;?php</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="c1">// src/Controller/PorteesController.php: the four data ranges</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="k">use</span> <span class="nx">App\Service\CompteurService</span><span class="p">;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="k">use</span> <span class="nx">App\Service\CookiesSignes</span><span class="p">;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="k">use</span> <span class="nx">App\Service\RequeteInfos</span><span class="p">;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Cookie</span><span class="p">;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="k">use</span> <span class="nx">Symfony\Component\Routing\Attribute\Route</span><span class="p">;</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="k">class</span> <span class="nc">PorteesController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="p">{</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a>     <span class="c1">// services are provided by the container (see Example 06)</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a>     <span class="p">#[</span><span class="nd">Route</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">'portees'</span><span class="p">,</span> <span class="nx">methods</span><span class="o">:</span> <span class="p">[</span><span class="s1">'GET'</span><span class="p">])]</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">afficher</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">CompteurService</span> <span class="nv">$compteur</span><span class="p">,</span> <span class="nx">RequeteInfos</span> <span class="nv">$infos</span><span class="p">,</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a>        <span class="nx">CookiesSignes</span> <span class="nv">$cookies</span><span class="p">)</span><span class="o">:</span> <span class="nd">Response</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21"></a>    <span class="p">{</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22"></a>         <span class="c1">// APPLICATION: the shared counter</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23"></a>        <span class="nv">$total</span> <span class="o">=</span> <span class="nv">$compteur</span><span class="o">-&gt;</span><span class="na">incrementer</span><span class="p">();</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24"></a>         <span class="c1">// SESSION: browser-specific data, stored by SERVEUR</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25"></a>         <span class="c1">// (a var/sessions file), retrieved via the session cookie</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26"></a>        <span class="nv">$session</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">();</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27"></a>        <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'visites'</span><span class="p">,</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'visites'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28"></a>         <span class="c1">// CLIENT: data stored by NAVIGATEUR in cookies,</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29"></a>         <span class="c1">// sent back to the server with each request; one in plain text, the other signed</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30"></a>        <span class="nv">$mesVisites</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">cookies</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'mesVisites'</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31"></a>        <span class="nv">$mesVisitesSigne</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$cookies</span><span class="o">-&gt;</span><span class="na">verifier</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">cookies</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'mesVisitesSigne'</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32"></a>        <span class="nv">$reponse</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'portees/portees.html.twig'</span><span class="p">,</span> <span class="p">[</span>
+<a id="__codelineno-5-33" name="__codelineno-5-33"></a>            <span class="s1">'total'</span> <span class="o">=&gt;</span> <span class="nv">$total</span><span class="p">,</span> <span class="s1">'instance'</span> <span class="o">=&gt;</span> <span class="nv">$infos</span><span class="o">-&gt;</span><span class="na">numero</span><span class="p">,</span>
+<a id="__codelineno-5-34" name="__codelineno-5-34"></a>            <span class="s1">'visitesSession'</span> <span class="o">=&gt;</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'visites'</span><span class="p">),</span> <span class="s1">'mesVisites'</span> <span class="o">=&gt;</span> <span class="nv">$mesVisites</span><span class="p">,</span>
+<a id="__codelineno-5-35" name="__codelineno-5-35"></a>            <span class="s1">'mesVisitesSigne'</span> <span class="o">=&gt;</span> <span class="nv">$mesVisitesSigne</span><span class="p">,</span>
+<a id="__codelineno-5-36" name="__codelineno-5-36"></a>        <span class="p">]);</span>
+<a id="__codelineno-5-37" name="__codelineno-5-37"></a>        <span class="nv">$reponse</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">setCookie</span><span class="p">(</span><span class="nx">Cookie</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">'mesVisites'</span><span class="p">,</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$mesVisites</span><span class="p">));</span>
+<a id="__codelineno-5-38" name="__codelineno-5-38"></a>        <span class="nv">$reponse</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">setCookie</span><span class="p">(</span><span class="nx">Cookie</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="s1">'mesVisitesSigne'</span><span class="p">,</span> <span class="nv">$cookies</span><span class="o">-&gt;</span><span class="na">signer</span><span class="p">((</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$mesVisitesSigne</span><span class="p">)));</span>
+<a id="__codelineno-5-39" name="__codelineno-5-39"></a>        <span class="k">return</span> <span class="nv">$reponse</span><span class="p">;</span>
+<a id="__codelineno-5-40" name="__codelineno-5-40"></a>    <span class="p">}</span>
+<a id="__codelineno-5-41" name="__codelineno-5-41"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>lines 19–20: the action receives the request and three services provided by the container;</li>
+<li>line 23: the application scope;</li>
+<li>lines 26–27: the session scope. <strong><em>[$request-&gt;getSession()]</em></strong> returns the user’s session; <strong><em>[get(cle, défaut)]</em></strong> reads a value, and <strong><em>[set(cle, valeur)]</em></strong> writes it. <em>[Symfony]</em> saves the session at the end of the request;</li>
+<li>Lines 30–31: the client scope, with two cookies. Their values are strings provided by the browser and may therefore be missing or invalid: the conversion <strong><em>[(int)]</em></strong> returns 0 for <strong><em>[null]</em></strong> or for text that is not a number. The value of the signed cookie is accepted only if its signature is correct;</li>
+<li>lines 32–39: To set a cookie, you need the response object: <strong><em>[render]</em></strong> constructs it (example 13), then <strong><em>[setCookie]</em></strong> adds the cookies to it. Without an expiration date, a cookie lasts until the browser is closed (this is a “session” cookie, as defined by browsers).</li>
+</ul>
+<h3 id="615-the-view-templatesporteesporteeshtmltwig">6.1.5. <span style="color: #1f4d78">The view: templates/portees/portees.html.twig</span></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span>
+<span class="normal"><a href="#__codelineno-6-19">19</a></span>
+<span class="normal"><a href="#__codelineno-6-20">20</a></span>
+<span class="normal"><a href="#__codelineno-6-21">21</a></span>
+<span class="normal"><a href="#__codelineno-6-22">22</a></span>
+<span class="normal"><a href="#__codelineno-6-23">23</a></span>
+<span class="normal"><a href="#__codelineno-6-24">24</a></span>
+<span class="normal"><a href="#__codelineno-6-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">&lt;!doctype html&gt;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"fr"</span><span class="p">&gt;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">"utf-8"</span><span class="p">&gt;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">"viewport"</span> <span class="na">content</span><span class="o">=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="p">&gt;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a>  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Portées<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a>  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ path('bootstrap', {fichier: 'css/bootstrap.min.css'}) }}"</span><span class="p">&gt;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a>  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"container py-3"</span><span class="p">&gt;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">"h3"</span><span class="p">&gt;</span>Les portées des données<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a>    {# info: the global variable in config/packages/twig.yaml, a service; during
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a>       la MÊME requête, c'est le même objet que celui de l'action #}
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a>    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a>      <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>application : {{ total }} visite(s) du site, tous navigateurs confondus<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a>      <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>requête : objet n° {{ instance }} (n° {{ infos.numero }} dans la vue),
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a>        requête reçue à {{ infos.debut }}<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a>      {# app.session: the session, also accessible in the views #}
+<a id="__codelineno-6-19" name="__codelineno-6-19"></a>      <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>session : {{ visitesSession }} visite(s) de ce navigateur ({{ app.session.get('visites') }} dans la vue)<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20"></a>      <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>client : {{ mesVisites }} visite(s) de ce navigateur (cookie en clair),
+<a id="__codelineno-6-21" name="__codelineno-6-21"></a>        {{ mesVisitesSigne }} (cookie signé)<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22"></a>    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23"></a>  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>line 16: <strong><em>[infos]</em></strong>, the global variable: during the same request, this is the same <strong><em>[RequeteInfos]</em></strong> object as the one from the action; the view displays its number, which must be the one received from the action;</li>
+<li>line 19: the session is also accessible in the views via the variable <strong><em>[app.session]</em></strong>.</li>
+</ul>
+<h3 id="616-execution">6.1.6. <span style="color: #1f4d78">Execution</span></h3>
+<p>After a few visits in a browser:</p>
+<p><img src="images/10000000000002BE0000010FEAB0664C.png" width="428" height="165" style="width:11.322cm;height:4.371cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE0000010FEAB0664C.png" /></p>
+<p>Let’s track the requests using <em>[curl]</em>, which acts as a first browser by storing its cookies in the file <strong><em>[a.txt]</em></strong>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>curl -i -c a.txt -b a.txt http://localhost:8000/
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>HTTP/1.1 200 OK
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>...
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>Set-Cookie: mesVisites=1; path=/; httponly; samesite=lax
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>Set-Cookie: mesVisitesSigne=1.e50058404359cc9be2e65b8d9366aa98b7d7db4ca7ee576cfdffb6d1a1150d37; path=/; httponly; samesite=lax
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>Set-Cookie: PHPSESSID=32da14307b05da3847ea54b2ae3e6f77; path=/; httponly; samesite=lax
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>...
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>      &lt;li&gt;application : 1 visite(s) du site, tous navigateurs confondus&lt;/li&gt;
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>      &lt;li&gt;requête : objet n° 1 (n° 1 dans la vue),
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a>        requête reçue à 09:48:29.888&lt;/li&gt;
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>            &lt;li&gt;session : 1 visite(s) de ce navigateur (1 dans la vue)&lt;/li&gt;
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a>      &lt;li&gt;client : 1 visite(s) de ce navigateur (cookie en clair),
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>        1 (cookie signé)&lt;/li&gt;
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a>...
+</code></pre></div></td></tr></table></div>
+<p>The response sets three cookies. The first, <strong><em>[mesVisites]</em></strong>, contains the value in plain text. The second, <strong><em>[mesVisitesSigne]</em></strong>, contains the same value, followed by a period and its signature. The third, <strong><em>[PHPSESSID]</em></strong>, is the session ID. The session data is stored in a file on the server, <strong><em>[var/sessions/dev/sess_32da14307b05da3847ea54b2ae3e6f77]</em></strong>, whose name matches the session ID:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>_sf2_attributes|a:1:{s:7:"visites";i:1;}_sf2_meta|a:3:{s:1:"u";i:1790502509;s:1:"c";i:1790502509;s:1:"l";i:0;}
+</code></pre></div></td></tr></table></div>
+<p>In the serialization format of <em>[PHP]</em>, we can see an array with a single key, <strong><em>[visites]</em></strong>, and an integer value of 1 (<strong><em>[i:1]</em></strong>), followed by information from <em>[Symfony]</em> regarding the session (creation and last use dates). A second visit, with the same cookies:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>curl -i -c a.txt -b a.txt http://localhost:8000/
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a>...
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a>Set-Cookie: mesVisites=2; path=/; httponly; samesite=lax
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a>Set-Cookie: mesVisitesSigne=2.4c7239f31c7e195c32dc5dcf2c7734ea05e6cb316eeab9a53239ab047db525ff; path=/; httponly; samesite=lax
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a>...
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a>      &lt;li&gt;application : 2 visite(s) du site, tous navigateurs confondus&lt;/li&gt;
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a>      &lt;li&gt;requête : objet n° 2 (n° 2 dans la vue),
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a>        requête reçue à 09:48:32.813&lt;/li&gt;
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a>            &lt;li&gt;session : 2 visite(s) de ce navigateur (2 dans la vue)&lt;/li&gt;
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a>      &lt;li&gt;client : 2 visite(s) de ce navigateur (cookie en clair),
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a>        2 (cookie signé)&lt;/li&gt;
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a>...
+</code></pre></div></td></tr></table></div>
+<p>The session already exists: the <strong><em>[PHPSESSID]</em></strong> cookie is not sent back. A second “browser,” with its own cookie file, which is initially empty:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a>curl -c b.txt -b b.txt http://localhost:8000/
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span>
+<span class="normal"><a href="#__codelineno-13-4">4</a></span>
+<span class="normal"><a href="#__codelineno-13-5">5</a></span>
+<span class="normal"><a href="#__codelineno-13-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a>      &lt;li&gt;application : 3 visite(s) du site, tous navigateurs confondus&lt;/li&gt;
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a>      &lt;li&gt;requête : objet n° 3 (n° 3 dans la vue),
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a>        requête reçue à 09:48:32.826&lt;/li&gt;
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a>            &lt;li&gt;session : 1 visite(s) de ce navigateur (1 dans la vue)&lt;/li&gt;
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a>      &lt;li&gt;client : 1 visite(s) de ce navigateur (cookie en clair),
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a>        1 (cookie signé)&lt;/li&gt;
+</code></pre></div></td></tr></table></div>
+<p>The application counter has continued; the session and cookies for the second browser start over at 1. Each request had its own <strong><em>[RequeteInfos]</em></strong> object, and in each one, the action and view saw the same one. Finally, a malicious user forges their own cookies: 1,000 visits in <strong><em>[mesVisites]</em></strong>, 999 in <strong><em>[mesVisitesSigne]</em></strong> (with a fabricated signature), and a session ID of their own invention:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a>curl -i -b "mesVisites=1000;mesVisitesSigne=999.abc;PHPSESSID=abc" http://localhost:8000/
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span>
+<span class="normal"><a href="#__codelineno-15-5">5</a></span>
+<span class="normal"><a href="#__codelineno-15-6">6</a></span>
+<span class="normal"><a href="#__codelineno-15-7">7</a></span>
+<span class="normal"><a href="#__codelineno-15-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>...
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a>Set-Cookie: PHPSESSID=1885ac965cf2dc862c4aecb994300956; path=/; httponly; samesite=lax
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a>...
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a>      &lt;li&gt;application : 4 visite(s) du site, tous navigateurs confondus&lt;/li&gt;
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a>      ...
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a>            &lt;li&gt;session : 1 visite(s) de ce navigateur (1 dans la vue)&lt;/li&gt;
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a>      &lt;li&gt;client : 1001 visite(s) de ce navigateur (cookie en clair),
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a>        1 (cookie signé)&lt;/li&gt;
+</code></pre></div></td></tr></table></div>
+<p>The plaintext cookie was accepted as is: 1,001 visits. The cookie <strong><em>[mesVisitesSigne]</em></strong>, however, did not have the correct signature: it was ignored, as if it were missing. Copying the signature from another value (such as that of <strong><em>[1]</em></strong>, next to the value <strong><em>[999]</em></strong>) doesn’t work any better: the signature depends on the value. As for the made-up session ID, it does not correspond to any existing session: <em>[Symfony]</em> rejects it (this is the “strict” mode for <em>[PHP]</em> sessions) and creates a new session with a new ID. The user therefore cannot choose another user’s session.</p>
+<p>Let’s remember the rule: data coming from the client is trustworthy only if it is <strong>protected</strong> by the server (signed, as here or as with the token in the chapter on authentication, or encrypted); data that has nothing to hide, and whose value is verified by the server (the language in Example 22), can remain in plaintext. A signature guarantees that a value has not been altered, but it does not hide it: a secret must never be entrusted to the client, even if it is signed.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner">
+
+      <div>
+        <a href="https://stahe.github.io" target="_blank">
+          https://stahe.github.io
+        </a>
+        <br>
+        This tutorial, written by Anthropic's AI <strong>Claude</strong> at the request of <strong>Serge Tahé</strong>, is made available to the public under the terms of the
+        <em>Creative Commons Attribution – Non-Commercial –
+        ShareAlike 3.0 Unported</em>.
+
+      </div>
+
+    </div>
+  </div>
+
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.indexes", "navigation.expand", "toc.integrate", "navigation.top"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="javascripts/focus.js"></script>
+      
+    
+  </body>
+</html>
