@@ -507,10 +507,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#513-the-language-of-each-query-srceventlistenerdefinirlanguephp" class="md-nav__link">
+  <a href="#513-the-language-of-each-query-srceventlistenersetlanguagephp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1.3. The language of each query: src/EventListener/DefinirLangue.php
+        5.1.3. The language of each query: src/EventListener/SetLanguage.php
       
     </span>
   </a>
@@ -518,10 +518,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#514-language-selection-srccontrollerlanguecontrollerphp" class="md-nav__link">
+  <a href="#514-language-selection-srccontrollerlanguagecontrollerphp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1.4. Language selection: src/Controller/LangueController.php
+        5.1.4. Language selection: src/Controller/LanguageController.php
       
     </span>
   </a>
@@ -808,8 +808,8 @@
 
 
 <h1 id="5-internationalization">5. <span style="color: #2e74b5">Internationalization</span></h1>
-<p>An internationalized application displays its text in the user’s language. The case study is in French and English. The principle is simple: the views no longer contain text, but <strong>keys</strong> (<strong><em>[MENU.ACCUEIL]</em></strong>), and a <strong>dictionary</strong> for each language associates a text with each key. The selected language is stored in a cookie.</p>
-<p><em>[Symfony]</em> includes a translation component, the <strong>Translator</strong>, which we already encountered in Example 09 for validation messages. Its dictionaries are stored in the <strong><em>[translations]</em></strong> folder, with one file per <strong>domain</strong> and per language: <strong><em>[validators.fr.yaml]</em></strong> (the validation messages domain, Example 09), <strong><em>[messages.fr.yaml]</em></strong> (the default domain, the one for our texts). The YAML format allows for nested keys: this is how the dictionaries for versions <em>[ASP.NET Core MVC]</em>, <em>[NestJS]</em>, <em>[Spring MVC]</em>, <em>[Flask]</em>, and <em>[Laravel]</em> from the case study, with the exception of syntax. For the syntax of the messages themselves, we choose the <strong>ICU</strong> format (<em>International Components for Unicode</em>), a standard that the <strong><em>[intl]</em></strong> extension of <em>[PHP]</em> can interpret, and which, for example, can inflect text into the plural form. The formatting of dates and amounts remains the same as in Example 16.</p>
+<p>An internationalized application displays its text in the user’s language. The case study is in French and English. The principle is simple: the views no longer contain text, but <strong>keys</strong> (<strong><em>[MENU.HOME]</em></strong>), and a <strong>dictionary</strong> for each language associates a text with each key. The selected language is stored in a cookie.</p>
+<p><em>[Symfony]</em> includes a translation component, the <strong>Translator</strong>, which we already encountered in Example 09 for validation messages. Its dictionaries are stored in the <strong><em>[translations]</em></strong> folder, with one file per <strong>domain</strong> and per language: <strong><em>[validators.en.yaml]</em></strong> (the validation messages domain, Example 09), <strong><em>[messages.en.yaml]</em></strong> (the default domain, the one for our texts). The YAML format allows for nested keys: this is how the dictionaries for versions <em>[ASP.NET Core MVC]</em>, <em>[NestJS]</em>, <em>[Spring MVC]</em>, <em>[Flask]</em>, and <em>[Laravel]</em> from the case study, with the exception of syntax. For the syntax of the messages themselves, we choose the <strong>ICU</strong> format (<em>International Components for Unicode</em>), a standard that the <strong><em>[intl]</em></strong> extension of <em>[PHP]</em> can interpret, and which, for example, can inflect text into the plural form. The formatting of dates and amounts remains the same as in Example 16.</p>
 <h2 id="51-example-22-a-bilingual-application">5.1. <span style="color: #2e74b5">Example 22: A Bilingual Application</span></h2>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
@@ -841,12 +841,12 @@
 <a id="__codelineno-0-4" name="__codelineno-0-4"></a>│       └── framework.yaml
 <a id="__codelineno-0-5" name="__codelineno-0-5"></a>├── src/
 <a id="__codelineno-0-6" name="__codelineno-0-6"></a>│   ├── Controller/
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a>│   │   ├── LangueController.php
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>│   │   ├── LanguageController.php
 <a id="__codelineno-0-8" name="__codelineno-0-8"></a>│   │   └── PagesController.php
 <a id="__codelineno-0-9" name="__codelineno-0-9"></a>│   ├── EventListener/
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a>│   │   └── DefinirLangue.php
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a>│   ├── Modele/
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a>│   │   └── Produit.php
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>│   │   └── SetLanguage.php
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>│   ├── Model/
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>│   │   └── Product.php
 <a id="__codelineno-0-13" name="__codelineno-0-13"></a>│   └── Twig/
 <a id="__codelineno-0-14" name="__codelineno-0-14"></a>│       └── FormatsExtension.php
 <a id="__codelineno-0-15" name="__codelineno-0-15"></a>├── templates/
@@ -854,8 +854,8 @@
 <a id="__codelineno-0-17" name="__codelineno-0-17"></a>│   │   └── navbar.html.twig
 <a id="__codelineno-0-18" name="__codelineno-0-18"></a>│   ├── layout.html.twig
 <a id="__codelineno-0-19" name="__codelineno-0-19"></a>│   └── pages/
-<a id="__codelineno-0-20" name="__codelineno-0-20"></a>│       ├── accueil.html.twig
-<a id="__codelineno-0-21" name="__codelineno-0-21"></a>│       └── produits.html.twig
+<a id="__codelineno-0-20" name="__codelineno-0-20"></a>│       ├── home.html.twig
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a>│       └── products.html.twig
 <a id="__codelineno-0-22" name="__codelineno-0-22"></a>├── translations/
 <a id="__codelineno-0-23" name="__codelineno-0-23"></a>│   ├── messages+intl-icu.en.yaml
 <a id="__codelineno-0-24" name="__codelineno-0-24"></a>│   └── messages+intl-icu.fr.yaml
@@ -872,22 +872,22 @@
 <span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-1-10">10</a></span>
-<span class="normal"><a href="#__codelineno-1-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># config/packages/framework.yaml: FrameworkBundle configuration</span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># config/packages/framework.yaml: the configuration of the FrameworkBundle</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nt">framework</span><span class="p">:</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="nt">secret</span><span class="p">:</span><span class="w"> </span><span class="s">'%env(APP_SECRET)%'</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">     </span><span class="c1"># the default language and the languages supported by the application</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="nt">default_locale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fr</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="nt">enabled_locales</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'fr'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'en'</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">     </span><span class="c1"># the TRADUCTION service; its dictionaries are in the translations/ folder.</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">     </span><span class="c1"># If a key is missing from the English dictionary, it is looked up in the French dictionary</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="c1"># the default language, and the languages supported by the application</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="nt">default_locale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">en</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="nt">enabled_locales</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'en'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'fr'</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="c1"># the TRANSLATION service; its dictionaries are in the translations/ folder.</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="c1"># A key missing from the French dictionary is looked up in the English dictionary</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="nt">translator</span><span class="p">:</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">        </span><span class="nt">default_path</span><span class="p">:</span><span class="w"> </span><span class="s">'%kernel.project_dir%/translations'</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">        </span><span class="nt">fallbacks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'fr'</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">        </span><span class="nt">fallbacks</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'en'</span><span class="p p-Indicator">]</span>
 </code></pre></div></td></tr></table></div>
 <ul>
 <li>Line 5: the application’s default language, which is used for requests that do not specify a language (Example 09);</li>
-<li>line 6: the languages supported by the application. This list is used by <em>[Symfony]</em> (the profiler, localized route generation, etc.); our own code also has its own list, in the listener <strong><em>[DefinirLangue]</em></strong>;</li>
-<li>lines 9–11: the translation service. <strong><em>[fallbacks]</em></strong> specifies the <strong>fallback</strong> language(s): if a key is missing from the requested language’s dictionary, it is looked up in the French dictionary. A key missing from all dictionaries is displayed as-is: this way, any omission is immediately visible on the screen.</li>
+<li>line 6: the languages supported by the application. This list is used by <em>[Symfony]</em> (the profiler, localized route generation, etc.); our own code also has its own list, in the listener <strong><em>[SetLanguage]</em></strong>;</li>
+<li>lines 9–11: the translation service. <strong><em>[fallbacks]</em></strong> specifies the <strong>fallback</strong> language(s): if a key is missing from the requested language’s dictionary, it is looked up in the English dictionary. A key missing from all dictionaries is displayed as-is: this way, any omission is immediately visible on the screen.</li>
 </ul>
 <h3 id="512-the-dictionaries">5.1.2. <span style="color: #1f4d78">The Dictionaries</span></h3>
 <p>The file <strong><em>[translations/messages+intl-icu.fr.yaml]</em></strong>:</p>
@@ -906,22 +906,22 @@
 <span class="normal"><a href="#__codelineno-2-13">13</a></span>
 <span class="normal"><a href="#__codelineno-2-14">14</a></span>
 <span class="normal"><a href="#__codelineno-2-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># translations/messages+intl-icu.fr.yaml: the French dictionary.</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="c1"># messages: the default domain; +intl-icu: messages follow the ICU syntax</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="c1"># messages: the default domain; +intl-icu: the messages follow the ICU syntax</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1"># ({name}: a parameter; {n, plural, ...}: a message that depends on a number)</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="nt">MENU</span><span class="p">:</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="nt">ACCUEIL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Accueil</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="nt">PRODUITS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Produits</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="nt">ACCUEIL</span><span class="p">:</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="nt">TITRE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Bienvenue</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="nt">BONJOUR</span><span class="p">:</span><span class="w"> </span><span class="s">'Bonjour</span><span class="nv"> </span><span class="s">{nom}</span><span class="nv"> </span><span class="s">!'</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="nt">HOME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Accueil</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="nt">PRODUCTS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Produits</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="nt">HOME</span><span class="p">:</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="nt">TITLE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Bienvenue</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="nt">HELLO</span><span class="p">:</span><span class="w"> </span><span class="s">'Bonjour</span><span class="nv"> </span><span class="s">{name}</span><span class="nv"> </span><span class="s">!'</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="nt">DATE</span><span class="p">:</span><span class="w"> </span><span class="s">'Nous</span><span class="nv"> </span><span class="s">sommes</span><span class="nv"> </span><span class="s">le</span><span class="nv"> </span><span class="s">{date}.'</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="nt">PRODUITS</span><span class="p">:</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="nt">TITRE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nos produits</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="nt">NOM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Produit</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">    </span><span class="nt">PRIX</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prix</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="nt">NOMBRE</span><span class="p">:</span><span class="w"> </span><span class="s">'{n,</span><span class="nv"> </span><span class="s">plural,</span><span class="nv"> </span><span class="s">=0</span><span class="nv"> </span><span class="s">{Aucun</span><span class="nv"> </span><span class="s">produit}</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">{#</span><span class="nv"> </span><span class="s">product}</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">{#</span><span class="nv"> </span><span class="s">products}}</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">catalog.'</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="nt">PRODUCTS</span><span class="p">:</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="nt">TITLE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nos produits</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="nt">NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Produit</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">    </span><span class="nt">PRICE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prix</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="nt">COUNT</span><span class="p">:</span><span class="w"> </span><span class="s">'{n,</span><span class="nv"> </span><span class="s">plural,</span><span class="nv"> </span><span class="s">=0</span><span class="nv"> </span><span class="s">{Aucun</span><span class="nv"> </span><span class="s">produit}</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">{#</span><span class="nv"> </span><span class="s">produit}</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">{#</span><span class="nv"> </span><span class="s">produits}}</span><span class="nv"> </span><span class="s">au</span><span class="nv"> </span><span class="s">catalogue.'</span>
 </code></pre></div></td></tr></table></div>
-<p>The file name consists of three parts: the domain (<strong><em>[messages]</em></strong>, the default domain), the suffix <strong><em>[+intl-icu]</em></strong>, which indicates messages in the ICU format, and the language (<strong><em>[fr]</em></strong>). Keys are grouped by topic using the YAML nesting structure: the menu item “Home” has the key <strong><em>[MENU.ACCUEIL]</em></strong>, with levels separated by a period. A text may contain <strong>parameters</strong>, written as <strong><em>[{nom}]</em></strong>, which are replaced during translation.</p>
+<p>The file name consists of three parts: the domain (<strong><em>[messages]</em></strong>, the default domain), the suffix <strong><em>[+intl-icu]</em></strong>, which indicates messages in the ICU format, and the language (<strong><em>[fr]</em></strong>). Keys are grouped by topic using the YAML nesting structure: the menu item “Accueil” has the key [MENU.HOME], with levels separated by a period. A text may contain <strong>parameters</strong>, written as <strong><em>[{name}]</em></strong>, which are replaced during translation.</p>
 <ul>
 <li>Line 9: Apostrophes delimit a string YAML; they are necessary when the text contains characters that YAML interprets (curly braces, colons, etc.);</li>
 <li>Line 15: a <strong>plural</strong> message. <strong><em>[{n, plural, ...}]</em></strong> selects a form based on the value of the parameter <strong><em>[n]</em></strong>: <strong><em>[=0]</em></strong> for exactly 0, <strong><em>[one]</em></strong> for the singular, <strong><em>[other]</em></strong> for the plural; <strong><em>[#]</em></strong> is replaced by the number. Plural rules depend on the language, and ICU knows them: in French, 0 and 1 are singular, whereas in English, 0 is plural (“0 products”). This is an improvement over the “product(s)” used in previous versions of the case study.</li>
@@ -941,20 +941,20 @@
 <span class="normal"><a href="#__codelineno-3-12">12</a></span>
 <span class="normal"><a href="#__codelineno-3-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># translations/messages+intl-icu.en.yaml: the English dictionary; same keys</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nt">MENU</span><span class="p">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="nt">ACCUEIL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Home</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="nt">PRODUITS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Products</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="nt">ACCUEIL</span><span class="p">:</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="nt">TITRE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Welcome</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="nt">BONJOUR</span><span class="p">:</span><span class="w"> </span><span class="s">'Hello</span><span class="nv"> </span><span class="s">{nom}!'</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="nt">HOME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Home</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="nt">PRODUCTS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Products</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="nt">HOME</span><span class="p">:</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="nt">TITLE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Welcome</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="nt">HELLO</span><span class="p">:</span><span class="w"> </span><span class="s">'Hello</span><span class="nv"> </span><span class="s">{name}!'</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="nt">DATE</span><span class="p">:</span><span class="w"> </span><span class="s">'Today</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">{date}.'</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="nt">PRODUITS</span><span class="p">:</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="nt">TITRE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Our products</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">    </span><span class="nt">NOM</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Product</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">    </span><span class="nt">PRIX</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Price</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">    </span><span class="nt">NOMBRE</span><span class="p">:</span><span class="w"> </span><span class="s">'{n,</span><span class="nv"> </span><span class="s">plural,</span><span class="nv"> </span><span class="s">=0</span><span class="nv"> </span><span class="s">{No</span><span class="nv"> </span><span class="s">products}</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">{#</span><span class="nv"> </span><span class="s">product}</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">{#</span><span class="nv"> </span><span class="s">products}}</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">catalog.'</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="nt">PRODUCTS</span><span class="p">:</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="nt">TITLE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Our products</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">    </span><span class="nt">NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Product</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">    </span><span class="nt">PRICE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Price</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">    </span><span class="nt">COUNT</span><span class="p">:</span><span class="w"> </span><span class="s">'{n,</span><span class="nv"> </span><span class="s">plural,</span><span class="nv"> </span><span class="s">=0</span><span class="nv"> </span><span class="s">{No</span><span class="nv"> </span><span class="s">products}</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">{#</span><span class="nv"> </span><span class="s">product}</span><span class="nv"> </span><span class="s">other</span><span class="nv"> </span><span class="s">{#</span><span class="nv"> </span><span class="s">products}}</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">catalogue.'</span>
 </code></pre></div></td></tr></table></div>
-<p>Without the suffix <strong><em>[+intl-icu]</em></strong>, the parameters would be written as <strong><em>[%nom%]</em></strong>, and the plural would use a syntax specific to <em>[Symfony]</em> (<strong><em>[{0} Aucun produit|{1} Un produit|]1, Inf[ %n% produits]</em></strong>). The format ICU is the one currently recommended by the <em>[Symfony]</em> documentation.</p>
-<h3 id="513-the-language-of-each-query-srceventlistenerdefinirlanguephp">5.1.3. <span style="color: #1f4d78">The language of each query: src/EventListener/DefinirLangue.php</span></h3>
+<p>Without the suffix <strong><em>[+intl-icu]</em></strong>, the parameters would be written as <strong><em>[%name%]</em></strong>, and the plural would use a syntax specific to <em>[Symfony]</em> (<strong><em>[{0} Aucun produit|{1} Un produit|]1, Inf[ %n% produits]</em></strong>). The format ICU is the one currently recommended by the <em>[Symfony]</em> documentation.</p>
+<h3 id="513-the-language-of-each-query-srceventlistenersetlanguagephp">5.1.3. <span style="color: #1f4d78">The language of each query: src/EventListener/SetLanguage.php</span></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -981,7 +981,7 @@
 <span class="normal"><a href="#__codelineno-4-24">24</a></span>
 <span class="normal"><a href="#__codelineno-4-25">25</a></span>
 <span class="normal"><a href="#__codelineno-4-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cp">&lt;?php</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="c1">// src/EventListener/DefinirLangue.php: the language of each request</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="c1">// src/EventListener/SetLanguage.php: the language of each request</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3"></a>
 <a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="k">namespace</span> <span class="nx">App\EventListener</span><span class="p">;</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5"></a>
@@ -989,32 +989,32 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Event\RequestEvent</span><span class="p">;</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\KernelEvents</span><span class="p">;</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9"></a>
-<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="c1">// priority 20: after routing, before the Symfony listeners that use the language (see Example 16)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="c1">// priority 20: after the routing, before Symfony's listeners that use the language (see example 16)</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="p">#[</span><span class="nd">AsEventListener</span><span class="p">(</span><span class="nx">event</span><span class="o">:</span> <span class="nx">KernelEvents</span><span class="o">::</span><span class="na">REQUEST</span><span class="p">,</span> <span class="nx">priority</span><span class="o">:</span> <span class="mi">20</span><span class="p">)]</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="k">class</span> <span class="nc">DefinirLangue</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="k">class</span> <span class="nc">SetLanguage</span>
 <a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="p">{</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14"></a>     <span class="c1">// the supported languages; the first is the default language</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15"></a>    <span class="k">public</span> <span class="k">const</span> <span class="no">LANGUES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'fr'</span><span class="p">,</span> <span class="s1">'en'</span><span class="p">];</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>    <span class="c1">// the supported languages; the first one is the default language</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>    <span class="k">public</span> <span class="k">const</span> <span class="no">LANGUAGES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'en'</span><span class="p">,</span> <span class="s1">'fr'</span><span class="p">];</span>
 <a id="__codelineno-4-16" name="__codelineno-4-16"></a>
-<a id="__codelineno-4-17" name="__codelineno-4-17"></a>    <span class="k">public</span> <span class="k">const</span> <span class="no">COOKIE</span> <span class="o">=</span> <span class="s1">'langue'</span><span class="p">;</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a>    <span class="k">public</span> <span class="k">const</span> <span class="no">COOKIE</span> <span class="o">=</span> <span class="s1">'language'</span><span class="p">;</span>
 <a id="__codelineno-4-18" name="__codelineno-4-18"></a>
-<a id="__codelineno-4-19" name="__codelineno-4-19"></a>     <span class="c1">// the language of the [langue] cookie, if supported; otherwise, French</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20"></a>    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">RequestEvent</span> <span class="nv">$evenement</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a>    <span class="c1">// the language of the [language] cookie if it is supported, English otherwise</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>    <span class="k">public</span> <span class="k">function</span> <span class="fm">__invoke</span><span class="p">(</span><span class="nx">RequestEvent</span> <span class="nv">$event</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
 <a id="__codelineno-4-21" name="__codelineno-4-21"></a>    <span class="p">{</span>
-<a id="__codelineno-4-22" name="__codelineno-4-22"></a>        <span class="nv">$requete</span> <span class="o">=</span> <span class="nv">$evenement</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
-<a id="__codelineno-4-23" name="__codelineno-4-23"></a>        <span class="nv">$langue</span> <span class="o">=</span> <span class="nv">$requete</span><span class="o">-&gt;</span><span class="na">cookies</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">COOKIE</span><span class="p">);</span>
-<a id="__codelineno-4-24" name="__codelineno-4-24"></a>        <span class="nv">$requete</span><span class="o">-&gt;</span><span class="na">setLocale</span><span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$langue</span><span class="p">,</span> <span class="nx">self</span><span class="o">::</span><span class="na">LANGUES</span><span class="p">,</span> <span class="k">true</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$langue</span> <span class="o">:</span> <span class="nx">self</span><span class="o">::</span><span class="na">LANGUES</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a>        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a>        <span class="nv">$language</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">cookies</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">COOKIE</span><span class="p">);</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a>        <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setLocale</span><span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$language</span><span class="p">,</span> <span class="nx">self</span><span class="o">::</span><span class="na">LANGUAGES</span><span class="p">,</span> <span class="k">true</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$language</span> <span class="o">:</span> <span class="nx">self</span><span class="o">::</span><span class="na">LANGUAGES</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 <a id="__codelineno-4-25" name="__codelineno-4-25"></a>    <span class="p">}</span>
 <a id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<p>This is the <strong><em>[FixerLangue]</em></strong> listener from Example 16, which this time retrieves the language from a cookie:</p>
+<p>This is the <strong><em>[SetLanguage]</em></strong> listener from Example 16, which this time retrieves the language from a cookie:</p>
 <ul>
 <li>line 11: the <strong><em>[kernel.request]</em></strong> event listener, with priority 20: after routing, but before the <em>[Symfony]</em> listeners that use the request language (Example 16);</li>
-<li>lines 15–17: the supported languages and the cookie name: public <strong>class constants</strong>, accessible from other classes (<strong><em>[DefinirLangue::LANGUES]</em></strong>);</li>
-<li>lines 22–24: the request language: the language of the <strong><em>[langue]</em></strong> cookie if one exists and is supported; otherwise, French. <strong><em>[$requete-&gt;cookies]</em></strong> is the set of cookies sent by the browser (example 05); <strong><em>[get]</em></strong> returns the value of a cookie, or <strong><em>[null]</em></strong>. <strong><em>[in_array]</em></strong>, with <strong><em>[true]</em></strong> as the third parameter, also compares the types (<strong><em>[===]</em></strong>). <strong><em>[setLocale]</em></strong> sets the request language: this is the language used by the translator, our formatting filters, and the <strong><em>[format_currency]</em></strong> filter of <em>[Twig]</em>.</li>
+<li>lines 15–17: the supported languages and the cookie name: public <strong>class constants</strong>, accessible from other classes (<strong><em>[SetLanguage::LANGUAGES]</em></strong>);</li>
+<li>lines 22–24: the request language: the language of the <strong><em>[language] cookie</em></strong> if one exists and is supported; otherwise, English. <strong><em>[$request-&gt;cookies]</em></strong> is the set of cookies sent by the browser (example 05); <strong><em>[get]</em></strong> returns the value of a cookie, or <strong><em>[null]</em></strong>. <strong><em>[in_array]</em></strong>, with <strong><em>[true]</em></strong> as the third parameter, also compares the types (<strong><em>[===]</em></strong>). <strong><em>[setLocale]</em></strong> sets the request language: this is the language used by the translator, our formatting filters, and the <strong><em>[format_currency]</em></strong> filter of <em>[Twig]</em>.</li>
 </ul>
-<p>Unlike <em>[Laravel]</em>, <em>[Symfony]</em> does not encrypt cookies: the <strong><em>[langue]</em></strong> cookie is transmitted in plain text. This is not a problem: it contains no confidential information, and the server accepts only supported languages. The following example revisits the issue of how much trust can be placed in a cookie.</p>
-<h3 id="514-language-selection-srccontrollerlanguecontrollerphp">5.1.4. <span style="color: #1f4d78">Language selection: src/Controller/LangueController.php</span></h3>
+<p>Unlike <em>[Laravel]</em>, <em>[Symfony]</em> does not encrypt cookies: the <strong><em>[language]</em></strong> cookie is transmitted in plain text. This is not a problem: it contains no confidential information, and the server accepts only supported languages. The following example revisits the issue of how much trust can be placed in a cookie.</p>
+<h3 id="514-language-selection-srccontrollerlanguagecontrollerphp">5.1.4. <span style="color: #1f4d78">Language selection: src/Controller/LanguageController.php</span></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -1060,55 +1060,55 @@
 <span class="normal"><a href="#__codelineno-5-43">43</a></span>
 <span class="normal"><a href="#__codelineno-5-44">44</a></span>
 <span class="normal"><a href="#__codelineno-5-45">45</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">&lt;?php</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="c1">// src/Controller/LangueController.php: the language selection</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="c1">// src/Controller/LanguageController.php: the choice of the language</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3"></a>
 <a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5"></a>
-<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="k">use</span> <span class="nx">App\EventListener\DefinirLangue</span><span class="p">;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="k">use</span> <span class="nx">App\EventListener\SetLanguage</span><span class="p">;</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Cookie</span><span class="p">;</span>
 <a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\RedirectResponse</span><span class="p">;</span>
 <a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="k">use</span> <span class="nx">Symfony\Component\Routing\Attribute\Route</span><span class="p">;</span>
 <a id="__codelineno-5-12" name="__codelineno-5-12"></a>
-<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="k">class</span> <span class="nc">LangueController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="k">class</span> <span class="nc">LanguageController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
 <a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="p">{</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15"></a>     <span class="c1">// GET /language/en: saves the selection in a cookie, then returns to the previous page.</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16"></a>     <span class="c1">// requirements: any language other than "fr" or "en" does not match the route (404)</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17"></a>     <span class="p">#[</span><span class="nd">Route</span><span class="p">(</span><span class="s1">'/langue/{code}'</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">'langue'</span><span class="p">,</span> <span class="nx">requirements</span><span class="o">:</span> <span class="p">[</span><span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="s1">'fr|en'</span><span class="p">],</span> <span class="nx">methods</span><span class="o">:</span> <span class="p">[</span><span class="s1">'GET'</span><span class="p">])]</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">changer</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$code</span><span class="p">)</span><span class="o">:</span> <span class="nd">RedirectResponse</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a>    <span class="c1">// GET /language/fr: stores the choice in a cookie, then goes back to the previous page.</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a>    <span class="c1">// requirements: a language other than en or fr does not match the route (404)</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a>    <span class="p">#[</span><span class="nd">Route</span><span class="p">(</span><span class="s1">'/language/{code}'</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">'language'</span><span class="p">,</span> <span class="nx">requirements</span><span class="o">:</span> <span class="p">[</span><span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="s1">'en|fr'</span><span class="p">],</span> <span class="nx">methods</span><span class="o">:</span> <span class="p">[</span><span class="s1">'GET'</span><span class="p">])]</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">change</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$code</span><span class="p">)</span><span class="o">:</span> <span class="nd">RedirectResponse</span>
 <a id="__codelineno-5-19" name="__codelineno-5-19"></a>    <span class="p">{</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20"></a>        <span class="nv">$reponse</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">pageDOrigine</span><span class="p">(</span><span class="nv">$request</span><span class="p">));</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21"></a>         <span class="c1">// the cookie: valid for one year, unreadable by the JavaScript on the page (httpOnly),</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22"></a>         <span class="c1">// never sent with a request from another site (POST) (sameSite lax)</span>
-<a id="__codelineno-5-23" name="__codelineno-5-23"></a>        <span class="nv">$reponse</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">setCookie</span><span class="p">(</span><span class="nx">Cookie</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="nx">DefinirLangue</span><span class="o">::</span><span class="na">COOKIE</span><span class="p">,</span> <span class="nv">$code</span><span class="p">)</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a>        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">originPage</span><span class="p">(</span><span class="nv">$request</span><span class="p">));</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21"></a>        <span class="c1">// the cookie: one year of life, unreadable by the JavaScript of the page (httpOnly),</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22"></a>        <span class="c1">// never sent with a POST request coming from another site (sameSite lax)</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23"></a>        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">setCookie</span><span class="p">(</span><span class="nx">Cookie</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="nx">SetLanguage</span><span class="o">::</span><span class="na">COOKIE</span><span class="p">,</span> <span class="nv">$code</span><span class="p">)</span>
 <a id="__codelineno-5-24" name="__codelineno-5-24"></a>            <span class="o">-&gt;</span><span class="na">withExpires</span><span class="p">(</span><span class="k">new</span> <span class="nx">\DateTimeImmutable</span><span class="p">(</span><span class="s1">'+1 year'</span><span class="p">))</span>
 <a id="__codelineno-5-25" name="__codelineno-5-25"></a>            <span class="o">-&gt;</span><span class="na">withHttpOnly</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
 <a id="__codelineno-5-26" name="__codelineno-5-26"></a>            <span class="o">-&gt;</span><span class="na">withSameSite</span><span class="p">(</span><span class="nx">Cookie</span><span class="o">::</span><span class="na">SAMESITE_LAX</span><span class="p">));</span>
-<a id="__codelineno-5-27" name="__codelineno-5-27"></a>        <span class="nd">return</span> <span class="nv">$reponse</span><span class="p">;</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27"></a>        <span class="nd">return</span> <span class="nv">$response</span><span class="p">;</span>
 <a id="__codelineno-5-28" name="__codelineno-5-28"></a>    <span class="p">}</span>
 <a id="__codelineno-5-29" name="__codelineno-5-29"></a>
-<a id="__codelineno-5-30" name="__codelineno-5-30"></a>     <span class="c1">// the page from which we came (Referer header), of which we retain only the path:</span>
-<a id="__codelineno-5-31" name="__codelineno-5-31"></a>     <span class="c1">// Redirecting to a full URL from the request would allow</span>
-<a id="__codelineno-5-32" name="__codelineno-5-32"></a>     <span class="c1">// to send the user to another site (“open redirect” vulnerability)</span>
-<a id="__codelineno-5-33" name="__codelineno-5-33"></a>    <span class="nd">private</span> <span class="nd">static</span> <span class="nd">function</span> <span class="nd">pageDOrigine</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span><span class="o">:</span> <span class="nd">string</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30"></a>    <span class="c1">// the page we come from (Referer header), of which we keep only the path:</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31"></a>    <span class="c1">// redirecting to a complete address coming from the request would allow</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32"></a>    <span class="c1">// sending the user to another site ("open redirect" flaw)</span>
+<a id="__codelineno-5-33" name="__codelineno-5-33"></a>    <span class="nd">private</span> <span class="nd">static</span> <span class="nd">function</span> <span class="nd">originPage</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span><span class="o">:</span> <span class="nd">string</span>
 <a id="__codelineno-5-34" name="__codelineno-5-34"></a>    <span class="p">{</span>
-<a id="__codelineno-5-35" name="__codelineno-5-35"></a>         <span class="c1">// parse_url breaks down a URL into its components (path, parameters, etc.)</span>
+<a id="__codelineno-5-35" name="__codelineno-5-35"></a>        <span class="c1">// parse_url splits a URL into its components (path, parameters...)</span>
 <a id="__codelineno-5-36" name="__codelineno-5-36"></a>        <span class="nv">$url</span> <span class="o">=</span> <span class="nd">parse_url</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'Referer'</span><span class="p">,</span> <span class="s1">''</span><span class="p">));</span>
-<a id="__codelineno-5-37" name="__codelineno-5-37"></a>        <span class="nv">$chemin</span> <span class="o">=</span> <span class="nv">$url</span><span class="p">[</span><span class="s1">'path'</span><span class="p">]</span> <span class="o">??</span> <span class="s1">''</span><span class="p">;</span>
-<a id="__codelineno-5-38" name="__codelineno-5-38"></a>         <span class="c1">// "//site.com/..." would be interpreted by the browser as a URL</span>
-<a id="__codelineno-5-39" name="__codelineno-5-39"></a>         <span class="c1">// on a AUTRE site: also rejected</span>
-<a id="__codelineno-5-40" name="__codelineno-5-40"></a>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">str_starts_with</span><span class="p">(</span><span class="nv">$chemin</span><span class="p">,</span> <span class="s1">'/'</span><span class="p">)</span> <span class="o">||</span> <span class="nb">str_starts_with</span><span class="p">(</span><span class="nv">$chemin</span><span class="p">,</span> <span class="s1">'//'</span><span class="p">))</span> <span class="p">{</span>
+<a id="__codelineno-5-37" name="__codelineno-5-37"></a>        <span class="nv">$path</span> <span class="o">=</span> <span class="nv">$url</span><span class="p">[</span><span class="s1">'path'</span><span class="p">]</span> <span class="o">??</span> <span class="s1">''</span><span class="p">;</span>
+<a id="__codelineno-5-38" name="__codelineno-5-38"></a>        <span class="c1">// "//site.com/..." would be understood by the browser as an address</span>
+<a id="__codelineno-5-39" name="__codelineno-5-39"></a>        <span class="c1">// on ANOTHER site: refused too</span>
+<a id="__codelineno-5-40" name="__codelineno-5-40"></a>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">str_starts_with</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="s1">'/'</span><span class="p">)</span> <span class="o">||</span> <span class="nb">str_starts_with</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span> <span class="s1">'//'</span><span class="p">))</span> <span class="p">{</span>
 <a id="__codelineno-5-41" name="__codelineno-5-41"></a>            <span class="k">return</span> <span class="s1">'/'</span><span class="p">;</span>
 <a id="__codelineno-5-42" name="__codelineno-5-42"></a>        <span class="p">}</span>
-<a id="__codelineno-5-43" name="__codelineno-5-43"></a>        <span class="k">return</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$url</span><span class="p">[</span><span class="s1">'query'</span><span class="p">])</span> <span class="o">?</span> <span class="s2">"</span><span class="si">$chemin</span><span class="s2">?</span><span class="si">{</span><span class="nv">$url</span><span class="p">[</span><span class="s1">'query'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="o">:</span> <span class="nv">$chemin</span><span class="p">;</span>
+<a id="__codelineno-5-43" name="__codelineno-5-43"></a>        <span class="k">return</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$url</span><span class="p">[</span><span class="s1">'query'</span><span class="p">])</span> <span class="o">?</span> <span class="s2">"</span><span class="si">$path</span><span class="s2">?</span><span class="si">{</span><span class="nv">$url</span><span class="p">[</span><span class="s1">'query'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="o">:</span> <span class="nv">$path</span><span class="p">;</span>
 <a id="__codelineno-5-44" name="__codelineno-5-44"></a>    <span class="p">}</span>
 <a id="__codelineno-5-45" name="__codelineno-5-45"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <ul>
-<li>line 17: the route <strong><em>[/langue/{code}]</em></strong>. The option <strong><em>[requirements]</em></strong> (example 02) limits the parameter to the two supported languages: <strong><em>[/langue/de]</em></strong> does not correspond to any route and returns a 404 error;</li>
+<li>line 17: the route <strong><em>[/language/{code}]</em></strong>. The option <strong><em>[requirements]</em></strong> (example 02) limits the parameter to the two supported languages: <strong><em>[/language/de]</em></strong> does not correspond to any route and returns a 404 error;</li>
 <li>line 20: the action responds with a redirect to the page the user came from: the user is taken back to their page in the new language;</li>
-<li>Lines 23–26: The response contains a <strong>cookie</strong>, which the browser will send back with every request. The <strong><em>[Cookie]</em></strong> class of <em>[Symfony]</em> describes it: <strong><em>[Cookie::create(nom, valeur)]</em></strong> creates it, and each method <strong><em>of [with...]</em></strong> returns a modified copy (an immutable object; see Example 03): <strong><em>[withExpires]</em></strong>, the expiration date (in one year); <strong><em>[withHttpOnly(true)]</em></strong> makes it invisible to <em>the [JavaScript]</em> on the page; <strong><em>[withSameSite(Cookie::SAMESITE_LAX)]</em></strong> prevents the browser from sending it with a POST request from another site. (<strong><em>[httpOnly]</em></strong> and <strong><em>[lax]</em></strong> are, incidentally, the default values for <strong><em>[Cookie::create]</em></strong>.) <strong><em>[$reponse-&gt;headers-&gt;setCookie]</em></strong> adds it to the response as a <strong><em>[Set-Cookie]</em></strong> header;</li>
+<li>Lines 23–26: The response contains a <strong>cookie</strong>, which the browser will send back with every request. The <strong><em>[Cookie]</em></strong> class of <em>[Symfony]</em> describes it: <strong><em>[Cookie::create(name, value)]</em></strong> creates it, and each method <strong><em>of [with...]</em></strong> returns a modified copy (an immutable object; see Example 03): <strong><em>[withExpires]</em></strong>, the expiration date (in one year); <strong><em>[withHttpOnly(true)]</em></strong> makes it invisible to <em>the [JavaScript]</em> on the page; <strong><em>[withSameSite(Cookie::SAMESITE_LAX)]</em></strong> prevents the browser from sending it with a POST request from another site. (<strong><em>[httpOnly]</em></strong> and <strong><em>[lax]</em></strong> are, incidentally, the default values for <strong><em>[Cookie::create]</em></strong>.) <strong><em>[$response-&gt;headers-&gt;setCookie]</em></strong> adds it to the response as a <strong><em>[Set-Cookie]</em></strong> header;</li>
 <li>lines 33–44: the original page is specified by the <strong><em>[Referer]</em></strong> header in the request (the misspelled version, with a single <strong><em>[r]</em></strong>, is the one used in the HTTP standard), which the browser populates with the URL from the page that contained the link. But this header comes from the client, which can put anything in it. Blindly redirecting to this address would turn our application into an <strong>open</strong> <em>redirect</em>: a malicious link bearing our domain name could send the user to a malicious site. Therefore, we retain only the path and parameters from URL (the <strong><em>[parse_url]</em></strong> function from <em>[PHP]</em> breaks it down into its components in an associative array), and we reject any path that begins with <strong><em>[//]</em></strong>, which the browser would interpret as the address of another site.</li>
 </ul>
 <h3 id="515-actions-srccontrollerpagescontrollerphp">5.1.5. <span style="color: #1f4d78">Actions: src/Controller/PagesController.php</span></h3>
@@ -1144,12 +1144,12 @@
 <span class="normal"><a href="#__codelineno-6-30">30</a></span>
 <span class="normal"><a href="#__codelineno-6-31">31</a></span>
 <span class="normal"><a href="#__codelineno-6-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">&lt;?php</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="c1">// src/Controller/PagesController.php: the actions are not language-aware:</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c1">// they provide data, and the views translate and format it</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="c1">// src/Controller/PagesController.php: the actions know nothing about the language:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c1">// they provide data, the views translate and format them</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4"></a>
 <a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="k">use</span> <span class="nx">App\Modele\Produit</span><span class="p">;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="k">use</span> <span class="nx">App\Model\Product</span><span class="p">;</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="k">use</span> <span class="nx">DateTimeImmutable</span><span class="p">;</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="k">use</span> <span class="nx">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
 <a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
@@ -1158,25 +1158,25 @@
 <a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="p">#[</span><span class="nd">Route</span><span class="p">(</span><span class="nx">methods</span><span class="o">:</span> <span class="p">[</span><span class="s1">'GET'</span><span class="p">])]</span>
 <a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="k">class</span> <span class="nc">PagesController</span> <span class="k">extends</span> <span class="nx">AbstractController</span>
 <a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="p">{</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16"></a>     <span class="p">#[</span><span class="nd">Route</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">'accueil'</span><span class="p">)]</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">accueil</span><span class="p">()</span><span class="o">:</span> <span class="nx">Response</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a>    <span class="p">#[</span><span class="nd">Route</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">'home'</span><span class="p">)]</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">home</span><span class="p">()</span><span class="o">:</span> <span class="nx">Response</span>
 <a id="__codelineno-6-18" name="__codelineno-6-18"></a>    <span class="p">{</span>
-<a id="__codelineno-6-19" name="__codelineno-6-19"></a>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'pages/accueil.html.twig'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'nom'</span> <span class="o">=&gt;</span> <span class="s1">'Marie'</span><span class="p">,</span>
-<a id="__codelineno-6-20" name="__codelineno-6-20"></a>            <span class="s1">'aujourdhui'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">DateTimeImmutable</span><span class="p">(</span><span class="s1">'2026-09-23'</span><span class="p">)]);</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19"></a>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'pages/home.html.twig'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Marie'</span><span class="p">,</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20"></a>            <span class="s1">'today'</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">DateTimeImmutable</span><span class="p">(</span><span class="s1">'2026-09-23'</span><span class="p">)]);</span>
 <a id="__codelineno-6-21" name="__codelineno-6-21"></a>    <span class="p">}</span>
 <a id="__codelineno-6-22" name="__codelineno-6-22"></a>
-<a id="__codelineno-6-23" name="__codelineno-6-23"></a>     <span class="p">#[</span><span class="nd">Route</span><span class="p">(</span><span class="s1">'/produits'</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">'produits'</span><span class="p">)]</span>
-<a id="__codelineno-6-24" name="__codelineno-6-24"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">produits</span><span class="p">()</span><span class="o">:</span> <span class="nx">Response</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23"></a>    <span class="p">#[</span><span class="nd">Route</span><span class="p">(</span><span class="s1">'/products'</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">'products'</span><span class="p">)]</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24"></a>    <span class="k">public</span> <span class="k">function</span> <span class="nf">products</span><span class="p">()</span><span class="o">:</span> <span class="nx">Response</span>
 <a id="__codelineno-6-25" name="__codelineno-6-25"></a>    <span class="p">{</span>
-<a id="__codelineno-6-26" name="__codelineno-6-26"></a>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'pages/produits.html.twig'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'produits'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-<a id="__codelineno-6-27" name="__codelineno-6-27"></a>            <span class="k">new</span> <span class="nx">Produit</span><span class="p">(</span><span class="s1">'Clavier'</span><span class="p">,</span> <span class="mi">2500</span><span class="p">),</span>
-<a id="__codelineno-6-28" name="__codelineno-6-28"></a>            <span class="k">new</span> <span class="nx">Produit</span><span class="p">(</span><span class="s1">'Souris'</span><span class="p">,</span> <span class="mi">1250</span><span class="p">),</span>
-<a id="__codelineno-6-29" name="__codelineno-6-29"></a>            <span class="k">new</span> <span class="nx">Produit</span><span class="p">(</span><span class="s1">'Écran'</span><span class="p">,</span> <span class="mi">114900</span><span class="p">),</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26"></a>        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'pages/products.html.twig'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'products'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27"></a>            <span class="k">new</span> <span class="nx">Product</span><span class="p">(</span><span class="s1">'Keyboard'</span><span class="p">,</span> <span class="mi">2500</span><span class="p">),</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28"></a>            <span class="k">new</span> <span class="nx">Product</span><span class="p">(</span><span class="s1">'Mouse'</span><span class="p">,</span> <span class="mi">1250</span><span class="p">),</span>
+<a id="__codelineno-6-29" name="__codelineno-6-29"></a>            <span class="k">new</span> <span class="nx">Product</span><span class="p">(</span><span class="s1">'Screen'</span><span class="p">,</span> <span class="mi">114900</span><span class="p">),</span>
 <a id="__codelineno-6-30" name="__codelineno-6-30"></a>        <span class="p">]]);</span>
 <a id="__codelineno-6-31" name="__codelineno-6-31"></a>    <span class="p">}</span>
 <a id="__codelineno-6-32" name="__codelineno-6-32"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
-<p>The actions are language-agnostic: they provide raw data (a name, a date, amounts in cents). Translation and formatting are handled by the views. The class <strong><em>[Produit]</em></strong> has a name and a price in cents; the extension <strong><em>[FormatsExtension]</em></strong> is the one from Example 16: its filter <strong><em>[date_longue]</em></strong> writes a date in the “full” format of the query language (“Wednesday, September 23, 2026,” “Wednesday, September 23, 2026”), and its filter <strong><em>[monnaie] writes</em></strong> an amount.</p>
+<p>The actions are language-agnostic: they provide raw data (a name, a date, amounts in cents). Translation and formatting are handled by the views. The class <strong><em>[Product]</em></strong> has a name and a price in cents; the extension <strong><em>[FormatsExtension]</em></strong> is the one from Example 16: its filter <strong><em>[long_date]</em></strong> writes a date in the “full” format of the query language (“Wednesday, September 23, 2026,” “mercredi 23 septembre 2026”), and its filter <strong><em>[money] writes</em></strong> an amount.</p>
 <h3 id="516-translate-in-the-views">5.1.6. <span style="color: #1f4d78">Translate in the views</span></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
@@ -1198,21 +1198,21 @@
 <span class="normal"><a href="#__codelineno-7-18">18</a></span>
 <span class="normal"><a href="#__codelineno-7-19">19</a></span>
 <span class="normal"><a href="#__codelineno-7-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="cp">&lt;!doctype html&gt;</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a>{# app.request.locale: the language of the request, "fr" or "en" #}
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>{# app.request.locale: the language of the request, "en" or "fr" #}
 <a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"{{ app.request.locale }}"</span><span class="p">&gt;</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5"></a>  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">"utf-8"</span><span class="p">&gt;</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6"></a>  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">"viewport"</span> <span class="na">content</span><span class="o">=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="p">&gt;</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7"></a>  {# title: the [titre] block of the page, already translated #}
-<a id="__codelineno-7-8" name="__codelineno-7-8"></a>  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{% block titre %}{% endblock %}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9"></a>  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ path('bootstrap', {fichier: 'css/bootstrap.min.css'}) }}"</span><span class="p">&gt;</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a>  {# the title: the [title] block of the page, already translated #}
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a>  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{% block title %}{% endblock %}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a>  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ path('bootstrap', {file: 'css/bootstrap.min.css'}) }}"</span><span class="p">&gt;</span>
 <a id="__codelineno-7-10" name="__codelineno-7-10"></a>  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ asset('css/styles.css') }}"</span><span class="p">&gt;</span>
 <a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 <a id="__codelineno-7-13" name="__codelineno-7-13"></a>  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"container py-3"</span><span class="p">&gt;</span>
 <a id="__codelineno-7-14" name="__codelineno-7-14"></a>    {% include 'fragments/navbar.html.twig' %}
 <a id="__codelineno-7-15" name="__codelineno-7-15"></a>    <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>
-<a id="__codelineno-7-16" name="__codelineno-7-16"></a>      {% block contenu %}{% endblock %}
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a>      {% block content %}{% endblock %}
 <a id="__codelineno-7-17" name="__codelineno-7-17"></a>    <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
 <a id="__codelineno-7-18" name="__codelineno-7-18"></a>  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
@@ -1220,7 +1220,7 @@
 </code></pre></div></td></tr></table></div>
 <ul>
 <li>line 3: the page’s <strong><em>[lang]</em></strong> attribute indicates its language to browsers, search engines, and screen readers; <strong><em>[app.request.locale]</em></strong> is the query language;</li>
-<li>line 8: the page title is provided by the page itself, already translated (block <strong><em>[titre]</em></strong>).</li>
+<li>line 8: the page title is provided by the page itself, already translated (block <strong><em>[title]</em></strong>).</li>
 </ul>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
@@ -1237,22 +1237,22 @@
 <span class="normal"><a href="#__codelineno-8-13">13</a></span>
 <span class="normal"><a href="#__codelineno-8-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">"navbar navbar-expand bg-light rounded mb-3 px-3"</span><span class="p">&gt;</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2"></a>  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"navbar-nav me-auto"</span><span class="p">&gt;</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3"></a>    {# 'CLE'|trans: the translation of a key, in the request language #}
-<a id="__codelineno-8-4" name="__codelineno-8-4"></a>    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ path('accueil') }}"</span><span class="p">&gt;</span>{{ 'MENU.ACCUEIL'|trans }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a>    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ path('produits') }}"</span><span class="p">&gt;</span>{{ 'MENU.PRODUITS'|trans }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>    {# 'KEY'|trans: the translation of a key, in the language of the request #}
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ path('home') }}"</span><span class="p">&gt;</span>{{ 'MENU.HOME'|trans }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ path('products') }}"</span><span class="p">&gt;</span>{{ 'MENU.PRODUCTS'|trans }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6"></a>  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <a id="__codelineno-8-7" name="__codelineno-8-7"></a>  {# the current language is highlighted #}
 <a id="__codelineno-8-8" name="__codelineno-8-8"></a>  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"btn-group btn-group-sm"</span><span class="p">&gt;</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9"></a>    {% for code in ['fr', 'en'] %}
 <a id="__codelineno-8-10" name="__codelineno-8-10"></a>      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"btn {{ app.request.locale == code ? 'btn-primary' : 'btn-outline-primary' }}"</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11"></a>         <span class="na">href</span><span class="o">=</span><span class="s">"{{ path('langue', {code: code}) }}"</span><span class="p">&gt;</span>{{ code|upper }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a>         <span class="na">href</span><span class="o">=</span><span class="s">"{{ path('language', {code: code}) }}"</span><span class="p">&gt;</span>{{ code|upper }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 <a id="__codelineno-8-12" name="__codelineno-8-12"></a>    {% endfor %}
 <a id="__codelineno-8-13" name="__codelineno-8-13"></a>  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
 </code></pre></div></td></tr></table></div>
 <ul>
 <li>lines 4–5: the filter <strong><em>[trans]</em></strong> translates a key into the language of the request;</li>
-<li>lines 9–12: one button per language, which triggers the action <strong><em>[/langue/{code}]</em></strong>. The current language is highlighted (<strong><em>[btn-primary]</em></strong>, solid button).</li>
+<li>lines 9–12: one button per language, which triggers the action <strong><em>[/language/{code}]</em></strong>. The current language is highlighted (<strong><em>[btn-primary]</em></strong>, solid button).</li>
 </ul>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
@@ -1264,20 +1264,20 @@
 <span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-9-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>{% extends 'layout.html.twig' %}
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a>{% block titre %}{{ 'ACCUEIL.TITRE'|trans }}{% endblock %}
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>{% block title %}{{ 'HOME.TITLE'|trans }}{% endblock %}
 <a id="__codelineno-9-3" name="__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a>{% block contenu %}
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a>  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ 'ACCUEIL.TITRE'|trans }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a>  {# a parameter: the trans filter parameter, an associative array #}
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ 'ACCUEIL.BONJOUR'|trans({nom: nom}) }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a>  {# the date, first formatted (filter date_longue, see Example 16), then passed as a parameter [date] #}
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ 'ACCUEIL.DATE'|trans({date: aujourdhui|date_longue}) }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>{% block content %}
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ 'HOME.TITLE'|trans }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>  {# a parameter: the parameter of the trans filter, an associative array #}
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ 'HOME.HELLO'|trans({name: name}) }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a>  {# the date, formatted first (long_date filter, see example 16), then passed as the [date] parameter #}
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ 'HOME.DATE'|trans({date: today|long_date}) }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <a id="__codelineno-9-10" name="__codelineno-9-10"></a>{% endblock %}
 </code></pre></div></td></tr></table></div>
 <ul>
-<li>line 2: the translated <strong><em>[titre]</em></strong> block for the template;</li>
-<li>line 7: the parameters for a text are provided in an associative array, a parameter of the <strong><em>[trans]</em></strong> filter; <strong><em>[{nom}]</em></strong> is replaced by the value of the key <strong><em>[nom]</em></strong>;</li>
-<li>line 9: the date, formatted in the query language by the <strong><em>[date_longue]</em></strong> filter, then passed as a parameter.</li>
+<li>line 2: the translated <strong><em>[title]</em></strong> block for the template;</li>
+<li>line 7: the parameters for a text are provided in an associative array, a parameter of the <strong><em>[trans]</em></strong> filter; <strong><em>[{name}] is replaced by the value of the key [name]</em></strong>;</li>
+<li>line 9: the date, formatted in the query language by the <strong><em>[long_date]</em></strong> filter, then passed as a parameter.</li>
 </ul>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
@@ -1299,40 +1299,40 @@
 <span class="normal"><a href="#__codelineno-10-18">18</a></span>
 <span class="normal"><a href="#__codelineno-10-19">19</a></span>
 <span class="normal"><a href="#__codelineno-10-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>{% extends 'layout.html.twig' %}
-<a id="__codelineno-10-2" name="__codelineno-10-2"></a>{% block titre %}{{ 'PRODUITS.TITRE'|trans }}{% endblock %}
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>{% block title %}{{ 'PRODUCTS.TITLE'|trans }}{% endblock %}
 <a id="__codelineno-10-3" name="__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4"></a>{% block contenu %}
-<a id="__codelineno-10-5" name="__codelineno-10-5"></a>  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ 'PRODUITS.TITRE'|trans }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>{% block content %}
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ 'PRODUCTS.TITLE'|trans }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 <a id="__codelineno-10-6" name="__codelineno-10-6"></a>  <span class="p">&lt;</span><span class="nt">table</span> <span class="na">class</span><span class="o">=</span><span class="s">"table table-sm w-auto"</span><span class="p">&gt;</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7"></a>    <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;&lt;</span><span class="nt">tr</span><span class="p">&gt;&lt;</span><span class="nt">th</span><span class="p">&gt;</span>{{ 'PRODUITS.NOM'|trans }}<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">"text-end"</span><span class="p">&gt;</span>{{ 'PRODUITS.PRIX'|trans }}<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;&lt;/</span><span class="nt">tr</span><span class="p">&gt;&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>    <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;&lt;</span><span class="nt">tr</span><span class="p">&gt;&lt;</span><span class="nt">th</span><span class="p">&gt;</span>{{ 'PRODUCTS.NAME'|trans }}<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">"text-end"</span><span class="p">&gt;</span>{{ 'PRODUCTS.PRICE'|trans }}<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;&lt;/</span><span class="nt">tr</span><span class="p">&gt;&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
 <a id="__codelineno-10-8" name="__codelineno-10-8"></a>    <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9"></a>      {% for produit in produits %}
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a>      {% for product in products %}
 <a id="__codelineno-10-10" name="__codelineno-10-10"></a>        <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11"></a>          <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ produit.nom }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12"></a>          {# the currency filter from Example 16: the format depends on the language #}
-<a id="__codelineno-10-13" name="__codelineno-10-13"></a>          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">"text-end"</span><span class="p">&gt;</span>{{ produit.prixCentimes|monnaie }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a>          <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ product.name }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a>          {# the money filter of example 16: the format depends on the language #}
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a>          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">"text-end"</span><span class="p">&gt;</span>{{ product.priceCents|money }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
 <a id="__codelineno-10-14" name="__codelineno-10-14"></a>        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
 <a id="__codelineno-10-15" name="__codelineno-10-15"></a>      {% endfor %}
 <a id="__codelineno-10-16" name="__codelineno-10-16"></a>    <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
 <a id="__codelineno-10-17" name="__codelineno-10-17"></a>  <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
-<a id="__codelineno-10-18" name="__codelineno-10-18"></a>  {# the message in the plural form: ICU selects the form based on parameter n #}
-<a id="__codelineno-10-19" name="__codelineno-10-19"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ 'PRODUITS.NOMBRE'|trans({n: produits|length}) }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18"></a>  {# the plural message: ICU chooses the form according to the n parameter #}
+<a id="__codelineno-10-19" name="__codelineno-10-19"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ 'PRODUCTS.COUNT'|trans({n: products|length}) }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <a id="__codelineno-10-20" name="__codelineno-10-20"></a>{% endblock %}
 </code></pre></div></td></tr></table></div>
 <ul>
-<li>line 13: the filter <strong><em>[monnaie]</em></strong>, whose result depends on the language;</li>
+<li>line 13: the filter <strong><em>[money]</em></strong>, whose result depends on the language;</li>
 <li>line 19: the <strong><em>[n]</em></strong> parameter for the plural form of the message: the number of products (<strong><em>[length]</em></strong>, example 14). The product names themselves are not translated: they are <strong>data</strong> that, in a real application, would come from a database.</li>
 </ul>
-<p>Outside of views, the translator is a service of type <strong><em>[TranslatorInterface]</em></strong>, which an action or service can receive via injection: <strong><em>[$traducteur-&gt;trans(&#x27;ACCUEIL.BONJOUR&#x27;, [&#x27;nom&#x27; =&gt; &#x27;Marie&#x27;])]</em></strong>.</p>
+<p>Outside of views, the translator is a service of type <strong><em>[TranslatorInterface]</em></strong>, which an action or service can receive via injection: <strong><em>[$translator-&gt;trans(&#x27;HOME.HELLO&#x27;, [&#x27;name&#x27; =&gt; &#x27;Marie&#x27;])]</em></strong>.</p>
 <h3 id="517-execution">5.1.7. <span style="color: #1f4d78">Execution</span></h3>
-<p>The home page, in French (the default language), then in English after clicking the &quot;EN&quot; button:</p>
+<p>The home page, in English (the default language), then in French after clicking the &quot;FR&quot; button:</p>
 <p><img src="images/10000000000002BE000001101E318119.png" width="428" height="166" style="width:11.322cm;height:4.387cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE000001101E318119.png" /></p>
 <p><img src="images/10000000000002BE00000110978B9793.png" width="428" height="166" style="width:11.322cm;height:4.387cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE00000110978B9793.png" /></p>
 <p>The products page, in both languages. The amounts follow the conventions of each language:</p>
 <p><img src="images/10000000000002BE0000017C1E47F355.png" width="428" height="232" style="width:11.322cm;height:6.13cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE0000017C1E47F355.png" /></p>
 <p><img src="images/10000000000002BE0000017CF8158390.png" width="428" height="232" style="width:11.322cm;height:6.13cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BE0000017CF8158390.png" /></p>
 <p>The language switch, as seen with <em>[curl]</em>. The option <strong><em>[-H]</em></strong> provides the header <strong><em>[Referer]</em></strong> that the browser would send:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a>curl -i -H "Referer: http://localhost:8000/produits" http://localhost:8000/language/en
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a>curl -i -H "Referer: http://localhost:8000/products" http://localhost:8000/language/en
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
 <span class="normal"><a href="#__codelineno-12-2">2</a></span>
@@ -1340,13 +1340,13 @@
 <span class="normal"><a href="#__codelineno-12-4">4</a></span>
 <span class="normal"><a href="#__codelineno-12-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a>HTTP/1.1 302 Found
 <a id="__codelineno-12-2" name="__codelineno-12-2"></a>...
-<a id="__codelineno-12-3" name="__codelineno-12-3"></a>Location: /produits
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a>Location: /products
 <a id="__codelineno-12-4" name="__codelineno-12-4"></a>...
-<a id="__codelineno-12-5" name="__codelineno-12-5"></a>Set-Cookie: langue=en; expires=Mon, 27 Sep 2027 09:47:37 GMT; Max-Age=31536000; path=/; httponly; samesite=lax
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a>Set-Cookie: language=en; expires=Mon, 27 Sep 2027 09:47:37 GMT; Max-Age=31536000; path=/; httponly; samesite=lax
 </code></pre></div></td></tr></table></div>
 <p>The redirect takes you back to the original page (<em>[Symfony]</em> writes a relative URL, which the browser completes), and the cookie is set for one year. A <strong><em>[Referer]</em></strong> that points to another site does not redirect you there: only its path is retained.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
-<span class="normal"><a href="#__codelineno-13-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a>curl -i -H "Referer: https://pirate.example/piege" http://localhost:8000/language/en
+<span class="normal"><a href="#__codelineno-13-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a>curl -i -H "Referer: https://pirate.example/trap" http://localhost:8000/language/en
 <a id="__codelineno-13-2" name="__codelineno-13-2"></a>curl -i -H "Referer: http://localhost:8000//pirate.example/x" http://localhost:8000/language/fr
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
@@ -1355,14 +1355,14 @@
 <span class="normal"><a href="#__codelineno-14-4">4</a></span>
 <span class="normal"><a href="#__codelineno-14-5">5</a></span>
 <span class="normal"><a href="#__codelineno-14-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a>HTTP/1.1 302 Found
-<a id="__codelineno-14-2" name="__codelineno-14-2"></a>Location: /piege
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a>Location: /trap
 <a id="__codelineno-14-3" name="__codelineno-14-3"></a>...
 <a id="__codelineno-14-4" name="__codelineno-14-4"></a>HTTP/1.1 302 Found
 <a id="__codelineno-14-5" name="__codelineno-14-5"></a>Location: /
 <a id="__codelineno-14-6" name="__codelineno-14-6"></a>...
 </code></pre></div></td></tr></table></div>
-<p>The page <strong><em>[/piege]</em></strong> does not exist on our site: the user will receive a 404 error, but will remain on our site. Finally, the home page, requested with the cookie <strong><em>[langue=en]</em></strong> (option <strong><em>[-b]</em></strong> of <em>[curl]</em>):</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>curl -b "langue=en" http://localhost:8000/
+<p>The page <strong><em>[/trap]</em></strong> does not exist on our site: the user will receive a 404 error, but will remain on our site. Finally, the home page, requested with the cookie <strong><em>[language=en]</em></strong> (option <strong><em>[-b]</em></strong> of <em>[curl]</em>):</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>curl -b "language=en" http://localhost:8000/
 </code></pre></div></td></tr></table></div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
@@ -1384,13 +1384,13 @@
 <a id="__codelineno-16-6" name="__codelineno-16-6"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Welcome<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
 <a id="__codelineno-16-7" name="__codelineno-16-7"></a>...
 <a id="__codelineno-16-8" name="__codelineno-16-8"></a>        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9"></a>    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"/produits"</span><span class="p">&gt;</span>Products<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a>    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"/products"</span><span class="p">&gt;</span>Products<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
 <a id="__codelineno-16-10" name="__codelineno-16-10"></a>...
 <a id="__codelineno-16-11" name="__codelineno-16-11"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Hello Marie!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <a id="__codelineno-16-12" name="__codelineno-16-12"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Today is Wednesday, September 23, 2026.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <a id="__codelineno-16-13" name="__codelineno-16-13"></a>...
 </code></pre></div></td></tr></table></div>
-<p>Another way to choose the language would have been to read the browser’s <strong><em>[Accept-Language]</em></strong> header (example 12; <strong><em>[$request-&gt;getPreferredLanguage([&#x27;fr&#x27;, &#x27;en&#x27;])]</em></strong> selects the best language from among those supported). The two are often combined: the browser’s language on the first visit, followed by the language the user has selected. A third method, commonly used with <em>[Symfony]</em>, places the language in the URL (<strong><em>[/en/produits]</em></strong>): a special route parameter, <strong><em>[{_locale}]</em></strong>, then sets the request language itself. This case study focuses on the cookie, with French as the default.</p>
+<p>Another way to choose the language would have been to read the browser’s <strong><em>[Accept-Language]</em></strong> header (example 12; <strong><em>[$request-&gt;getPreferredLanguage([&#x27;fr&#x27;, &#x27;en&#x27;])]</em></strong> selects the best language from among those supported). The two are often combined: the browser’s language on the first visit, followed by the language the user has selected. A third method, commonly used with <em>[Symfony]</em>, places the language in the URL (<strong><em>[/en/products]</em></strong>): a special route parameter, <strong><em>[{_locale}]</em></strong>, then sets the request language itself. This case study focuses on the cookie, with English as the default.</p>
 
 
 

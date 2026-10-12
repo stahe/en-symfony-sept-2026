@@ -698,10 +698,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#132-compose" class="md-nav__link">
+  <a href="#132-composer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        13.2. Compose
+        13.2. Composer
       
     </span>
   </a>
@@ -801,7 +801,7 @@
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a>php -m
 </code></pre></div></td></tr></table></div>
 <p>The first command should display a version number equal to or greater than 8.4 (for example, <strong><em>[PHP 8.4.12]</em></strong>); the second lists the loaded extensions, including <strong><em>[intl]</em></strong> and <strong><em>[pdo_mysql]</em></strong>. The command <strong><em>[php --ini]</em></strong> indicates which file, <strong><em>[php.ini],</em></strong> is being used.</p>
-<h2 id="132-compose">13.2. <span style="color: #2e74b5">Compose</span></h2>
+<h2 id="132-composer">13.2. <span style="color: #2e74b5">Composer</span></h2>
 <p><em>[Composer]</em> is the library manager for <em>[PHP]</em> (<a href="https://getcomposer.org/"><u><span style="color: #0563c1">getcomposer.org</span></u></a>). It is provided by <em>[Laragon]</em>; for <em>[Windows]</em>, but not for <em>[Laragon]</em>, its installer (<strong><em>[Composer-Setup.exe]</em></strong>) is used; for <em>[macOS]</em>, use <strong><em>[brew install composer]</em></strong>; for <em>[Linux]</em>, follow the instructions on the <a href="https://getcomposer.org/download/"><u><span style="color: #0563c1">getcomposer.org/download</span></u></a> page. Verify the installation:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>composer -V
 </code></pre></div></td></tr></table></div>
@@ -810,13 +810,13 @@
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
 <span class="normal"><a href="#__codelineno-4-3">3</a></span>
 <span class="normal"><a href="#__codelineno-4-4">4</a></span>
-<span class="normal"><a href="#__codelineno-4-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>composer install            # Install the project libraries (vendor folder)
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a>composer show               # the installed libraries
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a>composer update             # upgrade to the latest versions supported by composer.json
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a>composer require nom/paquet # Add a library to the project
-<a id="__codelineno-4-5" name="__codelineno-4-5"></a>composer dump-autoload      # Rebuild the class loader (after adding a class folder)
+<span class="normal"><a href="#__codelineno-4-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>composer install              # install the project's libraries (vendor folder)
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>composer show                 # the installed libraries
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>composer update               # move to the most recent versions allowed by composer.json
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>composer require name/package # add a library to the project
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>composer dump-autoload        # rebuild the class loader (after adding a folder of classes)
 </code></pre></div></td></tr></table></div>
-<p><em>[Composer]</em> downloads the libraries from the repository <em>[Packagist]</em> (<a href="https://packagist.org/"><u><span style="color: #0563c1">packagist.org</span></u></a>): an Internet connection is required during installation. If you are behind a corporate proxy, specify the proxy using the environment variables <strong><em>[HTTP_PROXY]</em></strong> and <strong><em>[HTTPS_PROXY]</em></strong>. The <strong><em>[vendor]</em></strong> folder is not copied from one machine to another (it may contain absolute paths and is large); it is recreated using <strong><em>[composer install]</em></strong>. This is why it is not included in the course materials. The <strong><em>[exemples]</em></strong> folder has its own <strong><em>[vendor]</em></strong> folder, shared by all 28 examples; the case study has its own.</p>
+<p><em>[Composer]</em> downloads the libraries from the repository <em>[Packagist]</em> (<a href="https://packagist.org/"><u><span style="color: #0563c1">packagist.org</span></u></a>): an Internet connection is required during installation. If you are behind a corporate proxy, specify the proxy using the environment variables <strong><em>[HTTP_PROXY]</em></strong> and <strong><em>[HTTPS_PROXY]</em></strong>. The <strong><em>[vendor]</em></strong> folder is not copied from one machine to another (it may contain absolute paths and is large); it is recreated using <strong><em>[composer install]</em></strong>. This is why it is not included in the course materials. The [examples] folder has its own <strong><em>[vendor]</em></strong> folder, shared by all 28 examples; the case study has its own.</p>
 <p>The case study uses the <em>[Runtime]</em> component of <em>[Symfony]</em>, which is also a <strong>plugin</strong> for <em>[Composer]</em>: it is this component that generates the <strong><em>[vendor/autoload_runtime.php]</em></strong> file read by <strong><em>[public/index.php]</em></strong>. <em>[Composer]</em> requests permission to run a plugin; the <strong><em>[composer.json]</em></strong> file from the application grants it (section <strong><em>[allow-plugins]</em></strong>). Under <em>[Linux]</em>, <em>[Composer]</em> refuses to run plugins when launched by the <strong><em>[root]</em></strong> account, unless the environment variable <strong><em>[COMPOSER_ALLOW_SUPERUSER]</em></strong> is set to <strong><em>[1]</em></strong>: without it, the file <strong><em>[autoload_runtime.php]</em></strong> would be missing (see “Common Issues” in the case study). It is best not to work under the <strong><em>[root]</em></strong> account.</p>
 <h2 id="133-installing-visual-studio-code">13.3. <span style="color: #2e74b5">Installing Visual Studio Code</span></h2>
 <p><em>[Visual Studio Code]</em> is downloaded to <a href="https://code.visualstudio.com/"><u><span style="color: #0563c1">code.visualstudio.com</span></u></a>. Add three extensions (View menu / Extensions):</p>
@@ -826,16 +826,16 @@
 <li><strong>YAML</strong> (from <em>[Red Hat]</em>): syntax highlighting and validation of configuration files (<strong><em>[config/packages/*.yaml]</em></strong>) and dictionaries (<strong><em>[translations/*.yaml]</em></strong>).</li>
 </ul>
 <p>The <strong>PHP Debug</strong> extension allows you to execute the code step by step using the <em>[Xdebug]</em> debugger (an extension of <em>[PHP]</em>, to be installed separately: <a href="https://xdebug.org/docs/install"><u><span style="color: #0563c1">xdebug.org</span></u></a>).</p>
-<p>Open the <strong><em>[exemples]</em></strong> folder or the case study folder (File menu / Open Folder). The built-in terminal (Terminal menu / New Terminal) allows you to launch applications and run <strong><em>[php bin/console ...]</em></strong> commands without leaving the editor.</p>
+<p>Open the <strong><em>[examples]</em></strong> folder or the case study folder (File menu / Open Folder). The built-in terminal (Terminal menu / New Terminal) allows you to launch applications and run <strong><em>[php bin/console ...]</em></strong> commands without leaving the editor.</p>
 <h2 id="134-installing-mysql-with-laragon">13.4. <span style="color: #2e74b5">Installing MySQL with Laragon</span></h2>
 <p><em>[Laragon]</em> installs a ready-to-use <em>[MySQL]</em> server under <em>[Windows]</em>, along with the <em>[HeidiSQL]</em> administration tool. After installation:</p>
 <ul>
 <li>the &quot;Start All&quot; button launches the <em>[MySQL]</em> server on port 3306;</li>
 <li>the user <strong><em>[root]</em></strong> has no password: these are the values of the variable <strong><em>[DATABASE_URL]</em></strong> from the <strong><em>[.env]</em></strong> files in Example 28 and the case study (<strong><em>[mysql://root:@127.0.0.1:3306/...]</em></strong>);</li>
-<li>the Database button opens <em>[HeidiSQL]</em>, where the File menu / Run File SQL runs the scripts <strong><em>[dbpersonnes.sql]</em></strong> (Example 28) and <strong><em>[dbrdvmedecins2.sql]</em></strong> (case study).</li>
+<li>the Database button opens <em>[HeidiSQL]</em>, where the File menu / Run File SQL runs the scripts <strong><em>[dbpersons.sql]</em></strong> (Example 28) and <strong><em>[dbrdvmedecins2.sql]</em></strong> (case study).</li>
 </ul>
-<p>In <em>[Linux]</em> or <em>[macOS]</em>, install <em>[MySQL]</em> or <em>[MariaDB]</em> using the system’s package manager, and run the scripts using the command-line client <strong><em>[mysql]</em></strong>. The <strong><em>[pdo_mysql]</em></strong> driver works with both without any configuration. Under <em>[Linux]</em>, the <strong><em>[root]</em></strong> account for <em>[MariaDB]</em> is often configured to log in only via the system account <strong><em>[root]</em></strong> (<strong><em>[sudo mysql]</em></strong>): a user is then created for the applications, and this is specified in the <strong><em>[DATABASE_URL]</em></strong> variable in their <strong><em>[.env]</em></strong> (<strong><em>[mysql://cours:cours@127.0.0.1:3306/...]</em></strong>) file:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>sudo mysql -e "CREATE USER 'cours'@'localhost' IDENTIFIED BY 'cours'; GRANT ALL ON *.* TO 'cours'@'localhost';"
+<p>In <em>[Linux]</em> or <em>[macOS]</em>, install <em>[MySQL]</em> or <em>[MariaDB]</em> using the system’s package manager, and run the scripts using the command-line client <strong><em>[mysql]</em></strong>. The <strong><em>[pdo_mysql]</em></strong> driver works with both without any configuration. Under <em>[Linux]</em>, the <strong><em>[root]</em></strong> account for <em>[MariaDB]</em> is often configured to log in only via the system account <strong><em>[root]</em></strong> (<strong><em>[sudo mysql]</em></strong>): a user is then created for the applications, and this is specified in the <strong><em>[DATABASE_URL]</em></strong> variable in their <strong><em>[.env]</em></strong> (<strong><em>[mysql://course:course@127.0.0.1:3306/...]</em></strong>) file:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>sudo mysql -e "CREATE USER 'course'@'localhost' IDENTIFIED BY 'course'; GRANT ALL ON *.* TO 'course'@'localhost';"
 </code></pre></div></td></tr></table></div>
 <p>With <em>[MariaDB]</em>, you also specify its version in the <strong><em>[DATABASE_URL]</em></strong> variable (<strong><em>[serverVersion=10.11.2-MariaDB]</em></strong> instead of <strong><em>[serverVersion=8.0.32]</em></strong>, for example): <em>[Doctrine]</em> adapts the SQL it writes to the database being used.</p>
 <h2 id="135-installing-curl">13.5. <span style="color: #2e74b5">Installing curl</span></h2>
@@ -845,10 +845,10 @@
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">3</a></span>
-<span class="normal"><a href="#__codelineno-6-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>symfony check:requirements      # Is the PHP configuration suitable for Symfony?
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a>symfony new mon-projet --webapp # A new complete project (see introduction)
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a>symfony server:start            # A development server (http://127.0.0.1:8000)
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a>symfony console debug:router    # is equivalent to `php bin/console debug:router`
+<span class="normal"><a href="#__codelineno-6-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>symfony check:requirements      # is PHP's configuration suitable for Symfony?
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>symfony new my-project --webapp # a new complete project (see introduction)
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>symfony server:start            # a development server (http://127.0.0.1:8000)
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>symfony console debug:router    # equivalent to php bin/console debug:router
 </code></pre></div></td></tr></table></div>
 <p>Its development server does the same thing as <strong><em>[php -S localhost:8000 -t public]</em></strong>, with a few advantages: it locates the <strong><em>[public]</em></strong> folder on its own, it can serve the site in HTTPS (after <strong><em>[symfony server:ca:install]</em></strong>), it can run in the background (<strong><em>[symfony server:start -d]</em></strong>, then <strong><em>[symfony server:stop]</em></strong>), and it selects the <em>[PHP]</em> version of the project when multiple versions are installed. The server built into <em>[PHP]</em>, used in this document, has the advantage of requiring no installation.</p>
 
